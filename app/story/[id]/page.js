@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import StoryPlayer from '../../../components/StoryPlayer';
+import LoadingPage from '../../../components/LoadingPage';
 
 export default function StoryPage() {
   const router = useRouter();
@@ -22,67 +23,7 @@ export default function StoryPage() {
   }, [id]);
 
   if (isLoading)
-    return (
-      <div className="loading-container">
-        <div className="loading-content">
-          <div className="loading-icon">📖</div>
-          <p className="loading-title">正在準備您的故事...</p>
-          <p className="loading-subtitle">這是你獨特的故事時刻</p>
-        </div>
-
-        <style jsx>{`
-          .loading-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 60vh;
-            padding: var(--spacing-3xl) var(--spacing-md);
-            animation: appear 0.6s ease-out;
-          }
-
-          .loading-content {
-            text-align: center;
-          }
-
-          .loading-icon {
-            font-size: 64px;
-            margin-bottom: var(--spacing-md);
-            animation: floatIcon 3s ease-in-out infinite;
-          }
-
-          .loading-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--color-brick-red);
-            margin-bottom: var(--spacing-xs);
-          }
-
-          .loading-subtitle {
-            font-size: 17px;
-            line-height: 1.625;
-            color: var(--color-brown-cream);
-            opacity: 0.8;
-            margin-top: var(--spacing-xs);
-          }
-
-          @keyframes appear {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes floatIcon {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-          }
-        `}</style>
-      </div>
-    );
+    return <LoadingPage message="正在準備您的故事..." />;
 
   if (!story)
     return (
@@ -102,8 +43,8 @@ export default function StoryPage() {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 60vh;
-            padding: var(--spacing-3xl) var(--spacing-md);
+            height: 100%;
+            padding: 64px 0;
             animation: appear 0.6s ease-out;
           }
 
@@ -117,9 +58,9 @@ export default function StoryPage() {
           }
 
           .error-title {
-            font-size: 18px;
+            font-size: max(1.25rem,min(2.5vw,1.75rem));
             font-weight: 600;
-            color: #4a3528;
+            color: var(--color-starlight-cream);
             margin-bottom: 16px;
           }
 
@@ -163,7 +104,7 @@ export default function StoryPage() {
     <>
       {/* Header section */}
       <div className="header-section">
-        <h1 className="story-title">
+        <h1 className="page-title">
           {story.title}
         </h1>
       </div>
@@ -177,20 +118,17 @@ export default function StoryPage() {
 
       <style jsx>{`
         .header-section {
-          margin-bottom: 24px;
+          margin-bottom: var(--spacing-xl);
         }
 
-        .story-title {
-          font-size: clamp(2rem, 4vw, 2.5rem);
-          font-weight: 900;
-          line-height: 1.2;
-          color: var(--color-text-dark);
-          text-align: center;
-          margin-bottom: 8px;
-          animation: appear 0.6s ease-out;
-          animation-delay: 0.1s;
-          text-shadow: 0 0 20px var(--color-gold-glow);
-          letter-spacing: -0.025em;
+        .page-title {
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: var(--spacing-md);
+          color: var(--color-text-primary);
+          font-size: max(2rem,min(4vw,2.5rem));
         }
 
         @keyframes appear {

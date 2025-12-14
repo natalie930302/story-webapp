@@ -54,8 +54,9 @@ export default function Sidebar() {
         .bg-pattern {
           position: absolute;
           inset: 0;
-          opacity: 0.08;
-          background: radial-gradient(circle at 20% 50%, rgba(255, 245, 235, 0.2) 0%, transparent 50%);
+          opacity: 0.12;
+          background: radial-gradient(circle at 20% 50%, var(--color-neon-teal) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, var(--color-neon-purple) 0%, transparent 50%);
         }
 
         .sidebar-content {
@@ -86,7 +87,7 @@ export default function Sidebar() {
           border-radius: var(--radius-full);
           background: var(--gradient-card);
           border: 2px solid var(--color-border-turquoise);
-          box-shadow: var(--shadow-lg);
+          box-shadow: var(--shadow-lg), var(--shadow-glow);
           font-size: 28px;
           color: var(--color-text-primary);
           text-decoration: none;
@@ -104,7 +105,7 @@ export default function Sidebar() {
         }
 
         .nav-item:hover {
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), var(--shadow-glow);
+          box-shadow: var(--shadow-xl), var(--shadow-glow);
           transform: translateY(-6px) scale(1.08);
         }
 
@@ -130,7 +131,7 @@ export default function Sidebar() {
           position: absolute;
           left: 100%;
           margin-left: var(--spacing-md);
-          background: linear-gradient(135deg, rgba(47, 107, 95, 0.95) 0%, rgba(139, 64, 73, 0.95) 100%);
+          background: linear-gradient(135deg, var(--color-night-medium) 0%, var(--color-night-light) 100%);
           color: var(--color-text-primary);
           padding: var(--spacing-xs) 14px;
           border-radius: var(--radius-sm);

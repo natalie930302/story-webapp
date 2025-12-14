@@ -102,7 +102,7 @@ export default function IndexPage() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background: var(--gradient-dark);
+          background: linear-gradient(135deg, var(--color-night-light) 0%, var(--color-night-medium) 100%);
           border-radius: var(--radius-lg);
           border: 2px solid var(--color-border-light);
           padding: var(--spacing-2xl) var(--spacing-xl);
@@ -127,7 +127,7 @@ export default function IndexPage() {
           position: absolute;
           inset: 0;
           border-radius: 24px;
-          background: radial-gradient(circle at 50% 50%, rgba(255, 198, 113, 0.15), transparent 70%);
+          background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2), transparent 70%);
           opacity: 0;
           transition: opacity 0.4s ease;
           pointer-events: none;
@@ -155,7 +155,7 @@ export default function IndexPage() {
           position: absolute;
           width: 4px;
           height: 4px;
-          background: radial-gradient(circle, rgba(255, 198, 113, 0.8) 0%, transparent 70%);
+          background: radial-gradient(circle, var(--color-gold-glow) 0%, transparent 70%);
           border-radius: 50%;
           top: 20%;
         }
@@ -179,7 +179,7 @@ export default function IndexPage() {
 
         .icon-wrapper {
           font-size: 48px;
-          color: #F4B45B;
+          color: var(--color-gold);
           margin-bottom: 24px;
           position: relative;
           z-index: 10;
@@ -204,13 +204,12 @@ export default function IndexPage() {
           position: relative;
           z-index: 10;
           text-align: center;
-          color: var(--color-beige);
-          text-shadow: 0 0 20px var(--color-gold-glow);
+          color: var(--color-starlight-cream);
           transition: color 0.3s ease;
         }
 
         .create-story-card:hover .card-title {
-          color: var(--color-gold-light);
+          color: var(--color-gold);
         }
 
         @keyframes magicFloat {
@@ -263,7 +262,7 @@ export default function IndexPage() {
         <Modal isVisible={isModalVisible} onClose={closeModal}>
           <div className="modal-header">
             <h2 className="modal-title">
-              <span>📖</span>
+              <span>✨</span>
               <span>創造一本新故事書</span>
             </h2>
           </div>
@@ -342,8 +341,7 @@ export default function IndexPage() {
           align-items: center;
           gap: var(--spacing-md);
           color: var(--color-text-primary);
-          font-size: clamp(1.75rem, 4vw, 2.25rem);
-          text-shadow: var(--shadow-md), var(--shadow-glow);
+          font-size: max(2rem,min(4vw,2.5rem));
         }
 
         .title-icon {
@@ -351,9 +349,10 @@ export default function IndexPage() {
         }
 
         .stories-grid {
+          width: 100%;
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: var(--spacing-md);
+          gap: var(--spacing-lg);
           margin-bottom: var(--spacing-xl);
         }
 
@@ -363,18 +362,19 @@ export default function IndexPage() {
         }
 
         .empty-state {
+          font-size: max(1.25rem,min(2.5vw,1.75rem));
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           gap: var(--spacing-xs);
-          color: #2a1620;
+          color: var(--color-text-secondary);
           padding: var(--spacing-2xl) var(--spacing-md);
           grid-column: 1 / -1;
         }
 
         .empty-icon {
-          font-size: 48px;
+          font-size: 64px;
           margin-bottom: 16px;
         }
 
@@ -390,14 +390,10 @@ export default function IndexPage() {
           display: flex;
           align-items: center;
           gap: var(--spacing-sm);
-          background: var(--gradient-primary);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: var(--color-text-primary);
         }
 
         .modal-body {
-          padding: var(--spacing-lg) 0;
         }
 
         .upload-form {
@@ -422,7 +418,7 @@ export default function IndexPage() {
         }
 
         .char-count {
-          color: var(--color-brown-cream);
+          color: var(--color-text-secondary);
           font-weight: 500;
           font-size: var(--text-sm);
         }
@@ -434,7 +430,7 @@ export default function IndexPage() {
           font-size: var(--text-base);
           line-height: 1.5;
           color: var(--color-text-dark);
-          background-color: rgba(245, 235, 224, 0.6);
+          background-color: rgba(245, 242, 234, 0.6);
           border: 2px solid var(--color-border-primary);
           border-radius: var(--radius-sm);
           outline: none;
@@ -450,7 +446,7 @@ export default function IndexPage() {
         .form-input:focus,
         .form-textarea:focus {
           border-color: var(--color-gold);
-          background-color: var(--color-beige);
+          background-color: var(--color-starlight-cream);
           box-shadow: 0 0 0 3px var(--color-gold-glow), 0 8px 24px rgb(0 0 0 / 0.12);
         }
 
@@ -480,7 +476,7 @@ export default function IndexPage() {
 
         .submit-button:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: var(--shadow-xl), 0 0 24px rgba(139, 64, 73, 0.3);
+          box-shadow: var(--shadow-xl), 0 0 24px rgba(157, 121, 242, 0.4), 0 0 16px rgba(242, 147, 176, 0.3);
         }
 
         .submit-button:active:not(:disabled) {
@@ -488,7 +484,7 @@ export default function IndexPage() {
         }
 
         .submit-button.uploading {
-          background: linear-gradient(135deg, rgba(139, 64, 73, 0.6) 0%, rgba(169, 76, 86, 0.6) 100%);
+          background: linear-gradient(135deg, rgba(157, 121, 242, 0.5) 0%, rgba(242, 147, 176, 0.5) 100%);
           cursor: not-allowed;
           opacity: 0.7;
         }

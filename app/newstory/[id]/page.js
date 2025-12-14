@@ -27,13 +27,16 @@ export default function NewStoryPage() {
     }
   }, [])
 
-  if (!story) return <LoadingPage message="正在為您加載最終故事內容..." />
+  if (!story) return <LoadingPage message="您的故事正在根據您的選擇進行編寫與塑造" />
 
   return (
     <>
       <div className="header-section">
-        <span className="story-badge">🎬 你導演的新故事 🎬</span>
-        <h1 className="story-title">{story.title}</h1>
+        <h1 className="page-title">
+          <span className="title-icon">🎬</span>
+          你導演的新故事
+          <span className="title-icon">🎬</span>
+        </h1>
       </div>
 
       {/* Story player */}
@@ -46,26 +49,22 @@ export default function NewStoryPage() {
       <style jsx>{`
         .header-section {
           text-align: center;
-          margin-bottom: 24px;
+          margin-bottom: var(--spacing-xl);
         }
 
-        .story-badge {
-          display: inline-block;
-          padding: 8px 20px;
-          border-radius: 999px;
-          background: rgba(139, 64, 73, 0.12);
-          color: var(--color-brick-red);
-          font-size: 15px;
-          font-weight: 600;
-          margin-bottom: 16px;
+        .page-title {
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: var(--spacing-md);
+          color: var(--color-text-primary);
+          font-size: max(2rem,min(4vw,2.5rem));
         }
 
-        .story-title {
-          font-size: clamp(1.75rem, 4vw, 2.25rem);
-          font-weight: 900;
-          margin-top: 16px;
-          color: var(--color-text-dark);
-          text-shadow: 0 0 20px var(--color-gold-glow);
+        .title-icon {
+          font-size: clamp(2rem, 4vw, 2.5rem);
+          animation: floatIcon 3s ease-in-out infinite;
         }
 
         @keyframes appear {
@@ -78,7 +77,12 @@ export default function NewStoryPage() {
             transform: translateY(0);
           }
         }
+        
+        @keyframes floatIcon {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
       `}</style>
     </>
-  )
+  );
 }

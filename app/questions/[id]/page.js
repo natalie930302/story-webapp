@@ -57,67 +57,10 @@ export default function QuestionsPage() {
     }
   };
 
-  if(isLoadingQuestions) return (
-    <div className="loading-questions-container">
-      <div className="loading-questions-content">
-        <div className="loading-questions-icon">❓</div>
-        <p className="loading-questions-title">正在準備您的獨特提問...</p>
-        <p className="loading-questions-subtitle">每個問題都是打造你故事的機會</p>
-      </div>
+  if(isLoadingQuestions) return <LoadingPage message="正在準備您的獨特提問" />;
 
-      <style jsx>{`
-        .loading-questions-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-          padding: 64px 0;
-          animation: appear 0.6s ease-out;
-        }
-
-        .loading-questions-content {
-          text-align: center;
-        }
-
-        .loading-questions-icon {
-          font-size: 64px;
-          margin-bottom: 16px;
-          animation: floatIcon 3s ease-in-out infinite;
-        }
-
-        .loading-questions-title {
-          font-size: 16px;
-          font-weight: 600;
-          color: var(--color-brick-red);
-        }
-
-        .loading-questions-subtitle {
-          color: var(--color-brown-cream);
-          opacity: 0.7;
-          margin-top: 8px;
-          font-size: 14px;
-        }
-
-        @keyframes appear {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes floatIcon {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-      `}</style>
-    </div>
-  );
-
-  if(questions.length === 0) return (
+  if(questions.length === 0) 
+    return (
     <div className="empty-questions-container">
       <div className="empty-questions-content">
         <div className="empty-questions-icon">⚠️</div>
@@ -150,9 +93,9 @@ export default function QuestionsPage() {
         }
 
         .empty-questions-title {
-          font-size: 16px;
+          font-size: max(1.25rem,min(2.5vw,1.75rem));
           font-weight: 600;
-          color: #4a3528;
+          color: var(--color-starlight-cream);
           margin-bottom: 16px;
         }
 
@@ -216,24 +159,19 @@ export default function QuestionsPage() {
 
       <style jsx>{`
         .header-section {
-          padding: 0 16px;
-          margin-bottom: 56px;
+          margin-bottom: var(--spacing-xl);
           animation: fadeInUp 0.6s ease-out;
         }
 
         .page-title {
-          font-size: clamp(1.75rem, 4vw, 2.5rem);
-          font-weight: 900;
-          margin-bottom: 24px;
-          color: #2a1620;
-          text-align: center;
+          font-weight: bold;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 18px;
-          line-height: 1.25;
-          text-shadow: 0 0 20px rgba(214, 168, 87, 0.2);
-          letter-spacing: -0.025em;
+          gap: var(--spacing-md);
+          color: var(--color-text-primary);
+          font-size: max(2rem,min(4vw,2.5rem));
+          margin-bottom: var(--spacing-md);
         }
 
         .title-icon {
@@ -242,11 +180,9 @@ export default function QuestionsPage() {
         }
 
         .page-subtitle {
-          color: rgba(42, 22, 32, 0.75);
+          color: var(--color-text-secondary);
           text-align: center;
           font-size: clamp(0.9rem, 2vw, 1.1rem);
-          max-width: 680px;
-          margin: 0 auto;
           line-height: 1.75;
           font-weight: 500;
           animation: fadeInUp 0.6s ease-out;

@@ -11,8 +11,8 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
   };
 
   return (
-    <div className="question-container">
-      <div className="question-inner">
+    <>
+      <div className="question-container">
         {/* Visual step indicators */}
         {totalQuestions > 1 && (
           <div className="step-indicators">
@@ -106,12 +106,10 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
         <style jsx>{`
           .question-container {
             width: 100%;
-          }
-
-          .question-inner {
+            padding: var(--spacing-md);
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: var(--spacing-2xl);
           }
 
           /* Step Indicators */
@@ -140,13 +138,13 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           .step-indicator.completed,
           .step-indicator.current {
             background: var(--gradient-primary);
-            color: var(--color-bg-dark);
+            color: var(--color-text-secondary);
             box-shadow: 0 8px 20px var(--color-gold-glow), var(--shadow-md);
           }
 
           .step-indicator.pending {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(232, 199, 85, 0.1) 100%);
-            color: rgba(139, 120, 101, 0.3);
+            background: var(--gradient-tertiary);
+            color: var(--color-text-muted);
             box-shadow: var(--shadow-sm);
           }
 
@@ -196,7 +194,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
 
           .question-box {
             padding: var(--spacing-2xl);
-            background: linear-gradient(135deg, rgba(47, 107, 95, 0.35) 0%, rgba(139, 64, 73, 0.35) 100%);
+            background: var(--gradient-tertiary);
             border-radius: var(--radius-lg);
             max-width: 820px;
             margin: 0 auto;
@@ -223,7 +221,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             line-height: 1.85;
             margin: 0;
             font-weight: 500;
-            color: rgba(255, 245, 235, 0.95);
+            color: var(--color-text-primary);
             position: relative;
             z-index: 1;
           }
@@ -250,7 +248,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             font-size: clamp(0.9rem, 1.8vw, 1.1rem);
             font-weight: 600;
             border-radius: var(--radius-lg);
-            background: var(--color-beige);
+            background: var(--color-starlight-cream);
             color: var(--color-text-dark);
             border: 2px solid var(--color-border-light);
             box-shadow: var(--shadow-md);
@@ -268,8 +266,8 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           }
 
           .option-button:hover:not(.selected) {
-            color: var(--color-text-dark);
-            background: linear-gradient(135deg, var(--color-pink-orange-light) 0%, var(--color-pink-orange) 100%);
+            color: var(--color-text-primary);
+            background: var(--gradient-secondary);
             border: 2px solid var(--color-gold);
             box-shadow: var(--shadow-xl), var(--shadow-glow);
             transform: translateY(-5px) scale(1.02);
@@ -344,7 +342,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             border-radius: var(--radius-lg);
             min-height: 200px;
             border: 2px solid var(--color-border-light);
-            background: linear-gradient(135deg, rgba(245, 235, 224, 0.95) 0%, rgba(232, 216, 200, 0.92) 100%);
+            background: linear-gradient(135deg, var(--color-starlight-cream) 0%, var(--color-starlight-medium) 100%);
             backdrop-filter: blur(12px);
             box-shadow: var(--shadow-md);
             transition: all var(--transition-smooth);
@@ -399,25 +397,25 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             background: var(--gradient-secondary);
             color: var(--color-text-primary);
             border: 2px solid var(--color-gold);
-            box-shadow: 0 12px 36px var(--color-gold-glow), 0 6px 16px rgba(139, 64, 73, 0.3), inset 0 2px 6px rgba(255,255,255,0.35);
+            box-shadow: var(--shadow-2xl), var(--shadow-glow);
             cursor: pointer;
           }
 
           .submit-button.enabled:hover {
             transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 20px 48px var(--color-gold-glow), 0 10px 24px rgba(139, 64, 73, 0.4), 0 0 0 6px var(--color-gold-glow), inset 0 2px 6px rgba(255,255,255,0.4);
+            box-shadow: var(--shadow-2xl), var(--shadow-glow-strong), 0 0 0 6px var(--color-gold-glow);
           }
 
           .submit-button.enabled:active {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 24px var(--color-gold-glow), 0 5px 12px rgba(139, 64, 73, 0.35);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
           }
 
           .submit-button.disabled {
-            background: linear-gradient(135deg, rgba(139, 120, 101, 0.4) 0%, rgba(139, 120, 101, 0.3) 100%);
-            color: rgba(245, 235, 224, 0.5);
+            background: var(--gradient-tertiary);
+            color: var(--color-text-muted);
             border: 2px solid var(--color-border-lighter);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-sm);
             cursor: not-allowed;
             opacity: 0.65;
           }
@@ -470,6 +468,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           }
         `}</style>
       </div>
-    </div>
+    </>
   );
 }

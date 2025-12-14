@@ -39,13 +39,12 @@ export default function ModulesPage() {
 
       <style jsx>{`
         .page-title {
-          font-size: clamp(2rem, 4vw, 2.5rem);
+          font-size: max(2rem,min(4vw,2.5rem));
           font-weight: 900;
           line-height: 1.2;
-          margin-bottom: 48px;
-          color: #2a1620;
+          margin-bottom: var(--spacing-xl);
+          color: var(--color-text-primary);
           text-align: center;
-          text-shadow: 0 0 20px rgba(214, 168, 87, 0.2);
           letter-spacing: -0.025em;
         }
 
@@ -53,9 +52,8 @@ export default function ModulesPage() {
           font-size: clamp(1.5rem, 3vw, 1.875rem);
           font-weight: 700;
           line-height: 1.375;
-          margin-bottom: 24px;
-          margin-top: 48px;
-          color: #2a1620;
+          margin-bottom: var(--spacing-md);
+          color: var(--color-text-primary);
           text-align: center;
         }
 
@@ -63,7 +61,7 @@ export default function ModulesPage() {
           font-size: 17px;
           line-height: 1.75;
           margin-bottom: 48px;
-          color: rgba(42, 22, 32, 0.8);
+          color: var(--color-text-secondary);
           text-align: center;
           max-width: 800px;
           margin: 0 auto var(--spacing-2xl);
@@ -72,16 +70,16 @@ export default function ModulesPage() {
 
         .modules-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
           gap: var(--spacing-lg);
           max-width: 1200px;
-          margin: 0 auto;
+          margin: var(--spacing-md) auto;
           padding: 0 var(--spacing-md);
         }
 
         .module-card {
           padding: var(--spacing-xl) var(--spacing-lg);
-          background: linear-gradient(135deg, rgba(245, 235, 224, 0.95) 0%, rgba(232, 216, 200, 0.9) 100%);
+          background: var(--gradient-beige);
           border-radius: var(--radius-md);
           border: 2px solid var(--color-border-primary);
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.06);

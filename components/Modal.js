@@ -73,19 +73,12 @@ export default function Modal({ isVisible, onClose, children }) {
           bottom: 0;
           width: 100vw;
           height: 100vh;
-          background: linear-gradient(
-            135deg, 
-            rgba(26, 21, 20, 0.92) 0%, 
-            rgba(42, 31, 29, 0.94) 25%, 
-            rgba(47, 107, 95, 0.88) 50%, 
-            rgba(42, 31, 29, 0.94) 75%, 
-            rgba(26, 21, 20, 0.92) 100%
-          );
+          background: var(--overlay-dark);
           backdrop-filter: blur(0px);
           -webkit-backdrop-filter: blur(0px);
           cursor: pointer;
           opacity: 0;
-          transition: all var(--transition-base);
+          transition: opacity var(--transition-base), backdrop-filter var(--transition-base);
           pointer-events: auto;
         }
 
@@ -101,15 +94,14 @@ export default function Modal({ isVisible, onClose, children }) {
           pointer-events: auto;
           background: linear-gradient(
             145deg,
-            var(--color-beige) 0%,
-            var(--color-beige-dark) 50%,
-            var(--color-beige-darker) 100%
+            var(--color-night-light) 0%,
+            var(--color-night-medium) 100%
           );
           border-radius: var(--radius-lg);
           box-shadow: 
             var(--shadow-2xl),
             0 0 0 2px var(--color-border-primary),
-            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            var(--shadow-glow);
           padding: 0;
           max-height: 90vh;
           position: relative;
@@ -133,9 +125,9 @@ export default function Modal({ isVisible, onClose, children }) {
           width: 40px;
           height: 40px;
           border-radius: var(--radius-full);
-          border: none;
-          background: rgba(139, 64, 73, 0.1);
-          color: var(--color-brick-red);
+          border: 1px solid var(--color-border-primary);
+          background: var(--color-night-medium);
+          color: var(--color-gold);
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -143,12 +135,14 @@ export default function Modal({ isVisible, onClose, children }) {
           transition: all var(--transition-smooth);
           z-index: 10;
           backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
 
         .modal-close:hover {
-          background: rgba(139, 64, 73, 0.2);
+          background: var(--color-night-medium);
+          border-color: var(--color-gold);
           transform: rotate(90deg) scale(1.1);
-          box-shadow: 0 4px 12px rgba(139, 64, 73, 0.2);
+          box-shadow: var(--shadow-glow);
         }
 
         .modal-close:active {
@@ -159,8 +153,9 @@ export default function Modal({ isVisible, onClose, children }) {
           overflow-y: auto;
           max-height: 90vh;
           padding: 40px;
+          color: var(--color-text-primary);
           scrollbar-width: thin;
-          scrollbar-color: var(--color-gold) transparent;
+          scrollbar-color: var(--color-gold) var(--color-night-dark);
         }
 
         .modal-content::-webkit-scrollbar {
@@ -168,7 +163,8 @@ export default function Modal({ isVisible, onClose, children }) {
         }
 
         .modal-content::-webkit-scrollbar-track {
-          background: transparent;
+          background: var(--color-night-dark);
+          border-radius: 3px;
         }
 
         .modal-content::-webkit-scrollbar-thumb {
@@ -177,7 +173,8 @@ export default function Modal({ isVisible, onClose, children }) {
         }
 
         .modal-content::-webkit-scrollbar-thumb:hover {
-          background: var(--color-gold-dark);
+          background: var(--color-gold-light);
+          box-shadow: 0 0 12px var(--color-gold-glow);
         }
 
         @media (max-width: 640px) {

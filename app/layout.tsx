@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./style.css";
 import Sidebar from '../components/Sidebar';
+import StarfieldBackground from '../components/StarfieldBackground';
 
 export const metadata: Metadata = {
   title: "溫馨故事屋",
@@ -15,13 +16,12 @@ export default function RootLayout({
   return (
     <html lang="zh-TW">
       <body className="root-body">
-        <div className="wrapper">
-          <div className="layout-container">
-            <Sidebar />
-            <main className="main-content">
-              {children}
-            </main>
-          </div>
+        <StarfieldBackground />
+        <div className="layout-container">
+          <Sidebar />
+          <main className="main-content">
+            {children}
+          </main>
         </div>
       </body>
     </html>

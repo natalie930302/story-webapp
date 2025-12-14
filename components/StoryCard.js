@@ -3,12 +3,12 @@ import React, { useState } from "react"
 
 export default function StoryCard({ story = {}, onClick }) {
   const palettes = [
-      'linear-gradient(135deg, var(--color-brick-red) 0%, var(--color-brick-red-light) 50%, var(--color-brick-red-dark) 100%)',
-      'linear-gradient(135deg, var(--color-pink-orange-dark) 0%, var(--color-pink-orange) 50%, var(--color-brick-red-light) 100%)',
-      'linear-gradient(135deg, var(--color-brick-red-light) 0%, var(--color-brick-red-dark) 50%, var(--color-brick-red-ultra) 100%)',
-      'linear-gradient(135deg, var(--color-brick-red-dark) 0%, var(--color-pink-orange) 50%, var(--color-pink-orange-light) 100%)',
-      'linear-gradient(135deg, var(--color-turquoise) 0%, var(--color-turquoise-light) 50%, var(--color-brick-red) 100%)',
-      'linear-gradient(135deg, var(--color-pink-orange) 0%, var(--color-gold) 50%, var(--color-gold-light) 100%)'
+      'linear-gradient(135deg, var(--color-neon-purple) 0%, var(--color-neon-pink) 50%, var(--color-neon-blue) 100%)',
+      'linear-gradient(135deg, var(--color-neon-pink) 0%, var(--color-neon-purple) 50%, var(--color-gold) 100%)',
+      'linear-gradient(135deg, var(--color-neon-blue) 0%, var(--color-neon-teal) 50%, var(--color-neon-purple) 100%)',
+      'linear-gradient(135deg, var(--color-neon-teal) 0%, var(--color-neon-blue) 50%, var(--color-neon-pink) 100%)',
+      'linear-gradient(135deg, var(--color-gold) 0%, var(--color-neon-pink) 50%, var(--color-neon-purple) 100%)',
+      'linear-gradient(135deg, var(--color-neon-purple) 0%, var(--color-gold) 50%, var(--color-neon-teal) 100%)'
   ];
 
   const rawSeed = story._id 
@@ -81,9 +81,6 @@ export default function StoryCard({ story = {}, onClick }) {
                     <path d="M18 260 C60 280 120 280 160 240" />
                     <path d="M10 40 C40 70 80 70 120 40" strokeOpacity="0.9" />
                   </g>
-                  <g opacity="0.18" stroke="var(--color-gold)" strokeWidth="1">
-                    <path d="M22 26 C62 14 118 14 156 44" />
-                  </g>
                   <g opacity="0.12" fill="#fff" transform="translate(0,0)">
                     <circle cx="24" cy="40" r="3" />
                     <circle cx="152" cy="44" r="3" />
@@ -93,14 +90,14 @@ export default function StoryCard({ story = {}, onClick }) {
             </svg>
           </div>
 
-          <h3 className="story-title">{story.title || '無標題故事'}</h3>
+          <h3 className="page-title">{story.title || '無標題故事'}</h3>
 
           <div className="ribbon">
             <svg viewBox="0 0 512 512" height="45" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id={`ribbonGrad${seed}`} x1="0" x2="1">
-                  <stop offset="0" stopColor="var(--color-brick-red)" />
-                  <stop offset="1" stopColor="var(--color-brick-red-dark)" />
+                  <stop offset="0" stopColor="var(--color-neon-purple)" />
+                  <stop offset="1" stopColor="var(--color-neon-pink)" />
                 </linearGradient>
               </defs>
               <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" fill={`url(#ribbonGrad${seed})`} stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
@@ -142,7 +139,7 @@ export default function StoryCard({ story = {}, onClick }) {
 
         .book-container:hover {
           transform: translateY(-16px) rotateX(6deg) rotateY(-10deg) scale(1.05);
-          box-shadow: 0 32px 72px rgb(0 0 0 / 0.3), 0 16px 36px rgb(0 0 0 / 0.22), var(--shadow-glow-strong), 0 0 80px var(--color-gold-glow);
+          box-shadow: var(--shadow-2xl), var(--shadow-glow-strong);
         }
 
         .book-cover {
@@ -183,7 +180,7 @@ export default function StoryCard({ story = {}, onClick }) {
           height: 100%;
         }
 
-        .story-title {
+        .page-title {
           font-weight: 700;
           color: var(--color-text-primary);
           font-size: 2rem;
@@ -237,7 +234,7 @@ export default function StoryCard({ story = {}, onClick }) {
           bottom: 10px;
           width: calc(100% - 8px);
           border-radius: var(--radius-lg);
-          background: var(--color-beige);
+          background: var(--color-starlight-cream);
           box-shadow: inset -6px 0 12px rgba(0, 0, 0, 0.2);
           z-index: 1;
         }

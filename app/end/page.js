@@ -33,7 +33,7 @@ export default function EndPage() {
         }
 
         .end-title {
-          font-size: clamp(2rem, 5vw, 3rem);
+          font-size: max(2rem,min(4vw,2.5rem));
           font-weight: 900;
           margin-bottom: 24px;
           background: var(--gradient-primary);
@@ -46,7 +46,7 @@ export default function EndPage() {
         .end-message {
           font-size: clamp(1rem, 2vw, 1.25rem);
           line-height: 1.75;
-          color: var(--color-text-dark);
+          color: var(--color-text-secondary);
           opacity: 0.8;
           margin-bottom: 40px;
           max-width: 600px;
@@ -62,12 +62,12 @@ export default function EndPage() {
           border-radius: var(--radius-md);
           cursor: pointer;
           transition: all var(--transition-smooth);
-          box-shadow: 0 12px 32px rgba(139, 64, 73, 0.35), 0 6px 16px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 12px 32px rgba(157, 121, 242, 0.4), 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
         .home-button:hover {
           transform: translateY(-4px) scale(1.05);
-          box-shadow: 0 20px 48px rgba(139, 64, 73, 0.45), 0 10px 24px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 20px 48px rgba(157, 121, 242, 0.5), 0 10px 24px rgba(242, 147, 176, 0.3), 0 0 32px var(--color-gold-glow);
         }
 
         @keyframes appear {

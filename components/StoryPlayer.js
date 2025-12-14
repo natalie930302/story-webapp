@@ -9,25 +9,25 @@ const moduleConfig = {
     name: '風扇模組', 
     description: '感受涼涼的風吹過來，好像在奔跑一樣！', 
     icon: '🌬️',
-    color: '#93c5fd'
+    color: 'var(--color-neon-teal)'
   },
   heat: { 
     name: '熱燈模組', 
     description: '感受溫暖的陽光照在身上，好舒服喔！', 
     icon: '🔆',
-    color: '#fde047'
+    color: 'var(--color-gold)'
   },
   vibration: { 
     name: '震動馬達模組', 
     description: '感受震動的感覺，像是心臟跳動或車子行駛！', 
     icon: '⚙️',
-    color: '#d8b4fe'
+    color: 'var(--color-neon-purple)'
   },
   recording: { 
     name: '錄音模組', 
     description: '錄下你的聲音，讓故事變得更特別！', 
     icon: '🎙️',
-    color: '#86efac'
+    color: 'var(--color-neon-pink)'
   },
 };
 
@@ -168,8 +168,8 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
               className="progress-bar"
               style={{ width: `${((index + 1) / paragraphs.length) * 100}%` }}
             >
-              <div className="progress-shine"></div>
             </div>
+            <div className="progress-shine" />
           </div>
           <div className="progress-info">
             <span className="progress-label">第 {index + 1} 段</span>
@@ -199,7 +199,12 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
                     key={`${hint}-${idx}`}
                     className="module-badge"
                     style={{ 
-                      background: `linear-gradient(120deg, ${config.color} 0%, ${config.color}88 50%, ${config.color} 100%)`,
+                      background: `linear-gradient(
+                          120deg, 
+                          ${config.color} 0%, 
+                          color-mix(in srgb, ${config.color} 53%, transparent) 50%, 
+                          ${config.color} 100%
+                      )`,
                       borderColor: config.color
                     }}
                     title={config.description}
@@ -284,8 +289,10 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       </div>
     <style jsx>{`
       .player-container {
-        max-width: 1400px;
+        width: 100%;
+        max-width: 800px;
         margin: 0 auto;
+        padding: var(--spacing-md);
         animation: fadeInUp 0.6s ease-out;
         display: flex;
         flex-direction: column;
@@ -296,7 +303,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         justify-content: space-between;
         align-items: center;
         padding: 20px var(--spacing-lg);
-        background: var(--gradient-sidebar);
+        background: var(--gradient-dark);
         border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         box-shadow: var(--shadow-sm);
       }
@@ -315,7 +322,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 16px var(--color-gold-glow);
+        box-shadow: var(--shadow-glow);
         font-size: 26px;
         animation: iconFloat 3s ease-in-out infinite;
       }
@@ -332,7 +339,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       .header-title {
         font-size: 24px;
         font-weight: 800;
-        color: var(--color-beige);
+        color: var(--color-starlight-cream);
         margin: 0;
       }
 
@@ -347,7 +354,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         align-items: center;
         gap: var(--spacing-xs);
         font-size: 15px;
-        color: var(--color-beige);
+        color: var(--color-starlight-cream);
       }
 
       .progress-label {
@@ -355,7 +362,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .progress-divider {
-        color: var(--color-beige-dark);
+        color: var(--color-starlight-medium);
       }
 
       .progress-total {
@@ -365,12 +372,12 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       .text-card {
         position: relative;
         padding: var(--spacing-2xl) 56px;
-        background: var(--color-beige);
-        min-height: 320px;
+        background: var(--color-starlight-cream);
+        min-height: 280px;
         display: flex;
         align-items: center;
         overflow: hidden;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: var(--shadow-md);
         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
@@ -397,7 +404,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         font-family: BIZ UDPMincho, serif;
         font-size: 80px;
         font-weight: bold;
-        color: var(--color-brown-cream);
+        color: var(--color-brown-text);
         opacity: 0.18;
         line-height: 1;
         user-select: none;
@@ -434,10 +441,11 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .empty-text {
-        color: var(--color-brown-cream);
+        color: var(--color-brown-text);
         font-size: 18px;
         text-align: center;
         padding: 80px 0;
+        opacity: 0.5;
       }
 
       .text-segment {
@@ -458,7 +466,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         position: absolute;
         bottom: 20px;
         right: 20px;
-        background: var(--color-beige);
+        background: var(--color-starlight-cream);
         backdrop-filter: blur(12px);
         border-radius: var(--radius-md);
         padding: var(--spacing-sm) 18px;
@@ -486,7 +494,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         display: flex;
         align-items: center;
         gap: 6px;
-        padding: 6px var(--spacing-sm);
+        padding: 6px var(--spacing-md);
         border-radius: 20px;
         cursor: pointer;
         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -511,13 +519,13 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
 
       .module-badge:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        box-shadow: var(--shadow-md);
         filter: brightness(1.05);
       }
 
       .module-emoji {
         font-size: 18px;
-        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        filter: drop-shadow(var(--shadow-sm));
       }
 
       .module-badge .module-name {
@@ -531,7 +539,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         width: 240px;
         max-width: 100%;
         height: 8px;
-        background: rgba(139, 120, 101, 0.2);
+        background: var(--color-night-light);
         border-radius: var(--radius-full);
         overflow: hidden;
       }
@@ -554,8 +562,9 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         height: 100%;
         background: linear-gradient(90deg, 
           transparent 0%, 
-          rgba(255, 255, 255, 0.5) 50%, 
+          var(--color-gold-light) 50%, 
           transparent 100%);
+        opacity: 0.6;
         animation: progressShine 2s ease-in-out infinite;
       }
 
@@ -581,29 +590,29 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         border-radius: var(--radius-full);
         cursor: pointer;
         transition: all var(--transition-smooth);
-        box-shadow: 0 4px 20px var(--color-gold-glow);
+        box-shadow: var(--shadow-glow);
         position: relative;
         z-index: 2;
       }
 
       .btn-play.playing {
         background: var(--gradient-secondary);
-        box-shadow: 0 4px 20px rgba(139, 64, 73, 0.4);
+        box-shadow: var(--shadow-glow);
         animation: playingPulse 2s ease-in-out infinite;
       }
 
       @keyframes playingPulse {
         0%, 100% {
-          box-shadow: 0 4px 20px rgba(139, 64, 73, 0.4);
+          box-shadow: var(--shadow-glow);
         }
         50% {
-          box-shadow: 0 6px 28px rgba(139, 64, 73, 0.6);
+          box-shadow: var(--shadow-glow-strong);
         }
       }
 
       .btn-play:hover {
         transform: scale(1.06);
-        box-shadow: 0 6px 24px var(--color-gold-glow);
+        box-shadow: var(--shadow-glow-strong);
       }
 
       .btn-play:active {
@@ -611,8 +620,8 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .play-icon {
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        color: var(--color-bg-dark);
+        filter: drop-shadow(var(--shadow-sm));
+        color: var(--color-starlight-cream);
       }
 
       .btn-nav {
@@ -622,7 +631,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         align-items: center;
         justify-content: center;
         gap: 8px;
-        background: var(--color-beige);
+        background: var(--color-starlight-cream);
         border: 2px solid var(--color-border-light);
         border-radius: 26px;
         color: var(--color-text-dark);
@@ -647,10 +656,10 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .btn-nav:hover:not(.disabled) {
-        background: var(--color-beige-dark);
+        background: var(--color-starlight-medium);
         border-color: var(--color-gold);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px var(--color-gold-glow);
+        box-shadow: var(--shadow-glow);
       }
 
       .btn-nav:active:not(.disabled) {
@@ -710,7 +719,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
           text-shadow: 0 0 12px var(--color-gold-glow);
         }
         50% {
-          text-shadow: 0 0 20px var(--color-gold-glow), 0 0 30px rgba(212, 175, 55, 0.3);
+          text-shadow: 0 0 20px var(--color-gold-glow), 0 0 30px var(--color-gold-glow);
         }
       }
 
