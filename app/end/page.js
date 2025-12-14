@@ -5,16 +5,91 @@ import { useRouter } from 'next/navigation';
 export default function EndPage() {
   const router = useRouter();
   return (
-    <div className="end-hero appear">
-      <div className="end-badge">
+    <>
+      <div className="check-circle">
         <svg width="60" height="60" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
 
       <h1 className="end-title">圓滿謝幕</h1>
 
-      <p className="end-desc">感謝您的閱讀與互動！期待您下次的奇幻旅程。</p>
+      <p className="end-message">感謝您的閱讀與互動！期待您下次的奇幻旅程。</p>
 
-      <button onClick={() => router.push('/')} className="btn-primary btn-cta">返回書架</button>
-    </div>
+      <button onClick={() => router.push('/')} className="home-button">
+        返回書架
+      </button>
+
+      <style jsx>{`
+        .check-circle {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          background: var(--gradient-primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 32px;
+          box-shadow: 0 20px 48px var(--color-gold-glow), 0 8px 24px rgba(0, 0, 0, 0.15);
+          animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        .end-title {
+          font-size: clamp(2rem, 5vw, 3rem);
+          font-weight: 900;
+          margin-bottom: 24px;
+          background: var(--gradient-primary);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          letter-spacing: -0.025em;
+        }
+
+        .end-message {
+          font-size: clamp(1rem, 2vw, 1.25rem);
+          line-height: 1.75;
+          color: var(--color-text-dark);
+          opacity: 0.8;
+          margin-bottom: 40px;
+          max-width: 600px;
+        }
+
+        .home-button {
+          padding: 18px var(--spacing-2xl);
+          font-size: var(--text-xl);
+          font-weight: 700;
+          color: var(--color-text-primary);
+          background: var(--gradient-secondary);
+          border: none;
+          border-radius: var(--radius-md);
+          cursor: pointer;
+          transition: all var(--transition-smooth);
+          box-shadow: 0 12px 32px rgba(139, 64, 73, 0.35), 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .home-button:hover {
+          transform: translateY(-4px) scale(1.05);
+          box-shadow: 0 20px 48px rgba(139, 64, 73, 0.45), 0 10px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes appear {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes glowPulse {
+          0%, 100% {
+            box-shadow: 0 20px 48px var(--color-gold-glow), 0 8px 24px rgba(0, 0, 0, 0.15);
+          }
+          50% {
+            box-shadow: 0 20px 48px rgba(212, 175, 55, 0.55), 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 40px var(--color-gold-glow);
+          }
+        }
+      `}</style>
+    </>
   );
 }

@@ -58,164 +58,217 @@ export default function QuestionsPage() {
   };
 
   if(isLoadingQuestions) return (
-    <div className="flex justify-center items-center h-full py-16 appear" style={{animationDelay: '0s'}}>
-      <div style={{textAlign: 'center'}}>
-        <div className="icon-xl" style={{ marginBottom: 16, animation: 'float 3s ease-in-out infinite' }}>❓</div>
-        <p style={{fontWeight: 600, color: 'var(--brick-red)'}}>正在準備您的獨特提問...</p>
-        <p style={{ color: 'rgba(59,50,43,0.6)', marginTop: 8}}>每個問題都是打造你故事的機會</p>
+    <div className="loading-questions-container">
+      <div className="loading-questions-content">
+        <div className="loading-questions-icon">❓</div>
+        <p className="loading-questions-title">正在準備您的獨特提問...</p>
+        <p className="loading-questions-subtitle">每個問題都是打造你故事的機會</p>
       </div>
+
+      <style jsx>{`
+        .loading-questions-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          padding: 64px 0;
+          animation: appear 0.6s ease-out;
+        }
+
+        .loading-questions-content {
+          text-align: center;
+        }
+
+        .loading-questions-icon {
+          font-size: 64px;
+          margin-bottom: 16px;
+          animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .loading-questions-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: var(--color-brick-red);
+        }
+
+        .loading-questions-subtitle {
+          color: var(--color-brown-cream);
+          opacity: 0.7;
+          margin-top: 8px;
+          font-size: 14px;
+        }
+
+        @keyframes appear {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes floatIcon {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+      `}</style>
     </div>
   );
 
   if(questions.length === 0) return (
-    <div className="flex justify-center items-center h-full py-16 appear" style={{animationDelay: '0s'}}>
-      <div style={{textAlign: 'center'}}>
-        <div className="icon-xl" style={{ marginBottom: 16 }}>⚠️</div>
-        <p style={{fontWeight: 600, color: 'var(--deep-wood)'}}>無法載入提問</p>
+    <div className="empty-questions-container">
+      <div className="empty-questions-content">
+        <div className="empty-questions-icon">⚠️</div>
+        <p className="empty-questions-title">無法載入提問</p>
         <button 
           onClick={() => router.push(`/story/${id}`)}
-          style={{
-            marginTop: 16,
-            padding: '10px 20px',
-            background: 'linear-gradient(135deg, var(--hearth-glow), var(--brick-red))',
-            color: 'white',
-            border: 'none',
-            borderRadius: '12px',
-            fontWeight: 600,
-            cursor: 'pointer',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-          onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+          className="back-button"
         >
           返回故事
         </button>
       </div>
+
+      <style jsx>{`
+        .empty-questions-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          padding: 64px 0;
+          animation: appear 0.6s ease-out;
+        }
+
+        .empty-questions-content {
+          text-align: center;
+        }
+
+        .empty-questions-icon {
+          font-size: 64px;
+          margin-bottom: 16px;
+        }
+
+        .empty-questions-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: #4a3528;
+          margin-bottom: 16px;
+        }
+
+        .back-button {
+          padding: var(--spacing-sm) var(--spacing-lg);
+          font-size: var(--text-lg);
+          font-weight: 600;
+          color: #fff;
+          background: linear-gradient(135deg, #e55b3c 0%, #d87885 100%);
+          border: none;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          margin-top: 16px;
+        }
+
+        .back-button:hover {
+          transform: translateY(-2px);
+        }
+
+        @keyframes appear {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 
   if(isLoading) return <LoadingPage message="您的故事正在根據您的選擇進行編寫與塑造" />;
 
-  const progressPercentage = ((currentIndex + 1) / questions.length) * 100;
-
   return (
-    <div className="p-4 max-w-3xl mx-auto pt-4 animate-fade-in-up" style={{animation: 'fadeInUp 0.6s ease-out'}}>
+    <>
       {/* Header */}
-      <div style={{marginBottom: 28, animation: 'fadeInUp 0.6s ease-out'}}>
-        <h1 
-          style={{
-            fontWeight: 900,
-            marginBottom: 12,
-            color: 'var(--muted-ink)',
-            textAlign: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 12
-          }}
-        >
-          <span className="icon-md">✨</span>
+      <div className="header-section">
+        <h1 className="page-title">
+          <span className="title-icon">✨</span>
           你的創作，你的故事線
+          <span className="title-icon">✨</span>
         </h1>
-        <p 
-          style={{
-            color: 'rgba(59,50,43,0.6)',
-            textAlign: 'center'
-          }}
-        >
-          每個回答都會塑造你的獨特故事結局
+        <p className="page-subtitle">
+          回答這些問題，讓您的故事更加獨特與私人化
         </p>
-      </div>
-      
-      {/* Progress section */}
-      <div 
-        style={{
-          marginBottom: 28, 
-          padding: 20, 
-          background: 'linear-gradient(135deg, rgba(255,250,246,0.95), rgba(247,243,240,0.9))',
-          borderRadius: 24, 
-          boxShadow: '0 8px 24px rgba(0,0,0,0.06)', 
-          border: '2px solid rgba(214,168,87,0.15)',
-          animation: 'fadeInUp 0.6s ease-out'
-        }}
-      >
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12}}>
-          <span style={{ fontWeight: 700, color: 'var(--muted-ink)'}}>
-            <span style={{color: 'var(--brick-red)', fontWeight: 900}}>第 {currentIndex + 1} 題</span>
-            {' '} / 共 {questions.length} 題
-          </span>
-          <span style={{ fontWeight: 700, color: 'var(--hearth-glow)', background: 'rgba(229,91,60,0.1)', padding: '4px 10px', borderRadius: 12}}>
-            {Math.round(progressPercentage)}%
-          </span>
-        </div>
-
-        {/* Progress bar */}
-        <div style={{width: '100%', background: 'rgba(90,31,26,0.08)', height: 8, borderRadius: 999, overflow: 'hidden', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.04)'}}>
-          <div 
-            style={{
-              width: `${progressPercentage}%`,
-              height: 8,
-              borderRadius: 999,
-              background: 'linear-gradient(90deg, var(--hearth-glow), var(--brick-red))',
-              transition: 'width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-              boxShadow: '0 0 16px rgba(229,91,60,0.3)'
-            }}
-          />
-        </div>
-
-        {/* Visual step indicators */}
-        <div style={{display: 'flex', gap: 6, marginTop: 16, justifyContent: 'center'}}>
-          {questions.map((_, idx) => (
-            <div
-              key={idx}
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: '50%',
-                background: idx <= currentIndex 
-                  ? 'linear-gradient(135deg, var(--hearth-glow), var(--brick-red))'
-                  : 'rgba(90,31,26,0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: idx <= currentIndex ? 'white' : 'rgba(59,50,43,0.5)',
-                fontWeight: 700,
-                transition: 'all 0.3s ease',
-                boxShadow: idx <= currentIndex ? '0 4px 12px rgba(229,91,60,0.25)' : 'none',
-                transform: idx === currentIndex ? 'scale(1.1)' : 'scale(1)',
-                animation: idx === currentIndex ? 'glow-pulse 1.5s ease-in-out infinite' : 'none'
-              }}
-            >
-              {idx + 1}
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Question panel */}
-      <div className="reader-panel">
-        <Question 
-          key={currentIndex} 
-          question={questions[currentIndex]} 
-          onAnswer={handleAnswer} 
-          isLastQuestion={currentIndex === questions.length - 1}
-        />
-      </div>
+      <Question 
+        key={currentIndex} 
+        question={questions[currentIndex]} 
+        onAnswer={handleAnswer} 
+        isLastQuestion={currentIndex === questions.length - 1}
+        currentIndex={currentIndex}
+        totalQuestions={questions.length}
+      />
 
-      {/* Tips section */}
-      <div 
-        style={{
-          marginTop: 24,
-          padding: 16,
-          background: 'linear-gradient(135deg, rgba(214,168,87,0.08), rgba(229,91,60,0.04))',
-          borderLeft: '4px solid var(--golden)',
-          borderRadius: 16,
-          color: 'rgba(59,50,43,0.7)',
-          animation: 'fadeInUp 0.7s ease-out 0.2s both'
-        }}
-      >
-        <span style={{fontWeight: 700, color: 'var(--brick-red)'}}>💡 提示：</span> 你的每個回答都很重要，它們將直接影響故事的結局。盡情表達你的想法吧！
-      </div>
-    </div>
+      <style jsx>{`
+        .header-section {
+          padding: 0 16px;
+          margin-bottom: 56px;
+          animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-title {
+          font-size: clamp(1.75rem, 4vw, 2.5rem);
+          font-weight: 900;
+          margin-bottom: 24px;
+          color: #2a1620;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 18px;
+          line-height: 1.25;
+          text-shadow: 0 0 20px rgba(214, 168, 87, 0.2);
+          letter-spacing: -0.025em;
+        }
+
+        .title-icon {
+          font-size: clamp(2rem, 4vw, 2.5rem);
+          animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .page-subtitle {
+          color: rgba(42, 22, 32, 0.75);
+          text-align: center;
+          font-size: clamp(0.9rem, 2vw, 1.1rem);
+          max-width: 680px;
+          margin: 0 auto;
+          line-height: 1.75;
+          font-weight: 500;
+          animation: fadeInUp 0.6s ease-out;
+          animation-delay: 0.15s;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes floatIcon {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+      `}</style>
+    </>
   );
 }

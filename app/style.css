@@ -1,0 +1,327 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&family=Noto+Serif+TC:wght@300;400;500;600;700;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPMincho:wght@700&display=swap");
+
+@import "tailwindcss";
+
+/* 設計系統：統一的顏色、間距、陰影定義 */
+:root {
+  /* 主要顏色 - 深紅磚色系 */
+  --color-brick-red: #8b4049;
+  --color-brick-red-light: #a94c56;
+  --color-brick-red-dark: #6d3238;
+  --color-brick-red-ultra: #4f1d23;
+
+  /* 深綠松色系 */
+  --color-turquoise: #2f6b5f;
+  --color-turquoise-light: #3d8775;
+  --color-turquoise-dark: #234f46;
+  --color-turquoise-ultra: #1a3d35;
+
+  /* 金色系 (主要用於邊框和發光) */
+  --color-gold: #d4af37;
+  --color-gold-light: #e8c755;
+  --color-gold-dark: #b8962c;
+  --color-gold-glow: rgba(212, 175, 55, 0.45);
+
+  /* 粉橘色系 */
+  --color-pink-orange: #e8967d;
+  --color-pink-orange-light: #f3ac98;
+  --color-pink-orange-dark: #d57d64;
+
+  /* 米棕白色系 */
+  --color-beige: #f5ebe0;
+  --color-beige-dark: #e8d8c8;
+  --color-beige-darker: #d4c1b0;
+  --color-brown-cream: #8b7865;
+
+  /* 背景顏色 */
+  --color-bg-dark: #1a1514;
+  --color-bg-medium: #2a1f1d;
+  --color-bg-light: #3d2f2b;
+  --color-bg-accent: #4a3932;
+
+  /* 文字顏色 */
+  --color-text-primary: #f5ebe0;
+  --color-text-secondary: rgba(245, 235, 224, 0.85);
+  --color-text-muted: rgba(245, 235, 224, 0.6);
+  --color-text-dark: #2a1f1d;
+  --color-text-accent: #8b7865;
+
+  /* 邊框與分隔線 */
+  --color-border-primary: rgba(212, 175, 55, 0.35);
+  --color-border-light: rgba(212, 175, 55, 0.25);
+  --color-border-lighter: rgba(212, 175, 55, 0.15);
+  --color-border-turquoise: rgba(47, 107, 95, 0.4);
+
+  /* 覆蓋與半透明 */
+  --overlay-dark: rgba(26, 21, 20, 0.95);
+  --overlay-medium: rgba(42, 31, 29, 0.9);
+  --overlay-light: rgba(61, 47, 43, 0.8);
+
+  /* 間距系統 */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* 圓角 - 統一為 16px 或 24px */
+  --radius-sm: 16px;
+  --radius-md: 20px;
+  --radius-lg: 24px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* 陰影系統 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.25), 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-2xl: 0 20px 48px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 24px var(--color-gold-glow);
+  --shadow-glow-strong: 0 0 40px var(--color-gold-glow), 0 0 20px rgba(212, 175, 55, 0.3);
+
+  /* 漸變色 */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold) 50%,
+    var(--color-gold-light) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    135deg,
+    var(--color-brick-red) 0%,
+    var(--color-brick-red-light) 100%
+  );
+  --gradient-tertiary: linear-gradient(
+    135deg,
+    var(--color-turquoise-dark) 0%,
+    var(--color-turquoise) 100%
+  );
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--color-pink-orange-dark) 0%,
+    var(--color-pink-orange) 100%
+  );
+  --gradient-dark: linear-gradient(
+    135deg,
+    var(--color-bg-dark) 0%,
+    var(--color-bg-medium) 50%,
+    var(--color-bg-dark) 100%
+  );
+  --gradient-bg: linear-gradient(135deg, rgba(139, 64, 73, 0.95) 0%, rgba(109, 50, 56, 0.92) 100%);
+  --gradient-sidebar: linear-gradient(
+    180deg,
+    var(--color-turquoise-ultra) 0%,
+    var(--color-turquoise-dark) 50%,
+    rgba(26, 61, 53, 0.98) 100%
+  );
+  --gradient-card: linear-gradient(135deg, rgba(61, 47, 43, 0.85) 0%, var(--color-bg-medium) 100%);
+  --gradient-beige: linear-gradient(135deg, var(--color-beige) 0%, var(--color-beige-dark) 100%);
+
+  /* 過渡效果 - 統一流暢 */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 字體大小 */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", "Heiti TC", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-dark) 0%,
+    var(--color-bg-medium) 50%,
+    var(--color-bg-dark) 100%
+  );
+  color: var(--color-text-primary);
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 3rem 6rem;
+  margin: 0 auto;
+  background: var(--gradient-bg);
+  position: relative;
+}
+
+/* 統一的動畫定義 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatIcon {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--color-gold-glow);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--color-gold-glow), 0 0 60px rgba(212, 175, 55, 0.2);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1) rotate(180deg);
+  }
+}
+
+@keyframes magicFloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}

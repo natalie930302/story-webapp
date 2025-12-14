@@ -30,11 +30,10 @@ export default function NewStoryPage() {
   if (!story) return <LoadingPage message="正在為您加載最終故事內容..." />
 
   return (
-    <div className="p-4 pt-6 max-w-4xl mx-auto appear" style={{animationDelay: '0s'}}>
-      <div style={{textAlign:'center', marginBottom:24}}
-      >
-        <span style={{display:'inline-block', background:'rgba(229,91,60,0.08)', color:'var(--hearth-glow)', fontWeight:800, padding:'10px 16px', borderRadius:16}}>🎬 你導演的新故事 🎬</span>
-        <h1 style={{fontWeight:900, marginTop:18, color:'var(--muted-ink)'}}>{story.title}</h1>
+    <>
+      <div className="header-section">
+        <span className="story-badge">🎬 你導演的新故事 🎬</span>
+        <h1 className="story-title">{story.title}</h1>
       </div>
 
       {/* Story player */}
@@ -43,6 +42,43 @@ export default function NewStoryPage() {
         onNext={() => router.push('/end')} 
         buttonText="故事結局"
       />
-    </div>
+
+      <style jsx>{`
+        .header-section {
+          text-align: center;
+          margin-bottom: 24px;
+        }
+
+        .story-badge {
+          display: inline-block;
+          padding: 8px 20px;
+          border-radius: 999px;
+          background: rgba(139, 64, 73, 0.12);
+          color: var(--color-brick-red);
+          font-size: 15px;
+          font-weight: 600;
+          margin-bottom: 16px;
+        }
+
+        .story-title {
+          font-size: clamp(1.75rem, 4vw, 2.25rem);
+          font-weight: 900;
+          margin-top: 16px;
+          color: var(--color-text-dark);
+          text-shadow: 0 0 20px var(--color-gold-glow);
+        }
+
+        @keyframes appear {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </>
   )
 }

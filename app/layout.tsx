@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "./style.css";
 import Sidebar from '../components/Sidebar';
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "溫馨故事屋",
@@ -24,20 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`
-          ${geistSans.variable} 
-          ${geistMono.variable} 
-          antialiased 
-          min-h-screen 
-          font-sans
-        `}
-      >
-        <div className="app-shell-outer">
-          <div className="app-shell">
+    <html lang="zh-TW">
+      <body className="root-body">
+        <div className="wrapper">
+          <div className="layout-container">
             <Sidebar />
-            <main className="app-main">
+            <main className="main-content">
               {children}
             </main>
           </div>

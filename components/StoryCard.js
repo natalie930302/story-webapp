@@ -1,14 +1,14 @@
 "use client"
-import React from "react"
+import React, { useState } from "react"
 
 export default function StoryCard({ story = {}, onClick }) {
   const palettes = [
-      'linear-gradient(135deg, #8B2B2B 0%, #E55B3C 100%)',
-      'linear-gradient(135deg, #1F3A34 0%, #5A1F1A 100%)',
-      'linear-gradient(135deg, #5A1F1A 0%, #D6A857 100%)',
-      'linear-gradient(135deg, #2c3e4f 0%, #8B2B2B 100%)',
-      'linear-gradient(135deg, #E55B3C 0%, #D6A857 100%)',
-      'linear-gradient(135deg, #1F3A34 0%, #C84A6D 100%)'
+      'linear-gradient(135deg, var(--color-brick-red) 0%, var(--color-brick-red-light) 50%, var(--color-brick-red-dark) 100%)',
+      'linear-gradient(135deg, var(--color-pink-orange-dark) 0%, var(--color-pink-orange) 50%, var(--color-brick-red-light) 100%)',
+      'linear-gradient(135deg, var(--color-brick-red-light) 0%, var(--color-brick-red-dark) 50%, var(--color-brick-red-ultra) 100%)',
+      'linear-gradient(135deg, var(--color-brick-red-dark) 0%, var(--color-pink-orange) 50%, var(--color-pink-orange-light) 100%)',
+      'linear-gradient(135deg, var(--color-turquoise) 0%, var(--color-turquoise-light) 50%, var(--color-brick-red) 100%)',
+      'linear-gradient(135deg, var(--color-pink-orange) 0%, var(--color-gold) 50%, var(--color-gold-light) 100%)'
   ];
 
   const rawSeed = story._id 
@@ -22,38 +22,32 @@ export default function StoryCard({ story = {}, onClick }) {
   const handleActivate = () => onClick && onClick(story._id);
 
   return (
-    <div
-      className="p-4 appear"
+    <div 
+      className="card-wrapper"
       role="button"
       tabIndex={0}
       onClick={handleActivate}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleActivate();
-        }
-      }}
     >
-      <div className="book-card group">
-        <div className="book-inner relative" aria-hidden>
+      <div className="book-container">
 
-          <div className="book-front book-cover cover-layer relative overflow-hidden bg-cover bg-center" style={{ background: bg }}>
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" aria-hidden>
+        <div className="book-cover" style={{ background: bg }}>
+          <div className="pattern-container">
+            <svg className="pattern-svg" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" >
               <defs>
                 <linearGradient id={`g${seed}`} x1="0" x2="1">
-                  <stop offset="0" stopColor="rgba(255,255,255,0.14)" />
-                  <stop offset="1" stopColor="rgba(255,255,255,0.02)" />
+                  <stop offset="0" stopColor="rgba(255,255,255,0.18)" />
+                  <stop offset="1" stopColor="rgba(255,255,255,0.04)" />
                 </linearGradient>
               </defs>
 
               {patternType === 0 && (
-                <g aria-hidden>
+                <g >
                   <g opacity="0.26" stroke={`url(#g${seed})`} strokeWidth="8" strokeLinecap="round">
                     <path d="M-60 30 L240 330" />
                     <path d="M-20 0 L220 320" />
                     <path d="M20 -20 L220 260" />
                   </g>
-                  <g opacity="0.14" stroke="rgba(214,168,87,0.7)" strokeWidth="2" strokeLinecap="round">
+                  <g opacity="0.14" stroke="var(--color-gold)" strokeWidth="2" strokeLinecap="round">
                     <path d="M-60 30 L240 330" strokeDasharray="6 10" />
                   </g>
                   <g opacity="0.18" fill="none" stroke="#fff" strokeWidth="1">
@@ -63,13 +57,13 @@ export default function StoryCard({ story = {}, onClick }) {
               )}
 
               {patternType === 1 && (
-                <g aria-hidden>
-                  <g opacity="0.28" fill="#fff7d6" transform="translate(-6,-6)">
+                <g >
+                  <g opacity="0.28" fill="var(--color-beige)" transform="translate(-6,-6)">
                     <circle cx="40" cy="60" r="22" fillOpacity="0.08" />
                     <circle cx="120" cy="120" r="34" fillOpacity="0.06" />
                     <circle cx="80" cy="200" r="18" fillOpacity="0.08" />
                   </g>
-                  <g opacity="0.22" fill="none" stroke="#f6e7c2" strokeWidth="2">
+                  <g opacity="0.22" fill="none" stroke="var(--color-beige-dark)" strokeWidth="2">
                     <circle cx="40" cy="60" r="20" />
                     <circle cx="120" cy="120" r="28" />
                     <circle cx="80" cy="200" r="16" />
@@ -81,13 +75,13 @@ export default function StoryCard({ story = {}, onClick }) {
               )}
 
               {patternType === 2 && (
-                <g aria-hidden>
-                  <g opacity="0.3" stroke="#fff7d6" strokeWidth="1.8" fill="none">
+                <g >
+                  <g opacity="0.3" stroke="var(--color-beige)" strokeWidth="1.8" fill="none">
                     <path d="M18 20 C60 8 120 8 160 40" />
                     <path d="M18 260 C60 280 120 280 160 240" />
                     <path d="M10 40 C40 70 80 70 120 40" strokeOpacity="0.9" />
                   </g>
-                  <g opacity="0.18" stroke="rgba(214,168,87,0.6)" strokeWidth="1">
+                  <g opacity="0.18" stroke="var(--color-gold)" strokeWidth="1">
                     <path d="M22 26 C62 14 118 14 156 44" />
                   </g>
                   <g opacity="0.12" fill="#fff" transform="translate(0,0)">
@@ -97,37 +91,162 @@ export default function StoryCard({ story = {}, onClick }) {
                 </g>
               )}
             </svg>
-
-            <div className="book-title book-title-shadow">{story.title || '無標題故事'}</div>
-
-            <div className="bookmark-ribbon" aria-hidden>
-              <svg viewBox="0 0 512 512" height="45" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden className="svg-block">
-                <defs>
-                  <linearGradient id={`ribbonGrad${seed}`} x1="0" x2="1">
-                    <stop offset="0" stopColor="#ff7a7f" />
-                    <stop offset="1" stopColor="#d64a6d" />
-                  </linearGradient>
-                </defs>
-                <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" fill={`url(#ribbonGrad${seed})`} stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-              </svg>
-            </div>
-
-            <div className="seed-badge" aria-hidden style={{ animation: 'swing 3s ease-in-out infinite' }}>
-              <span className="icon-sm">✦</span>
-            </div>
           </div>
-          
-          <div className="book-page" />
-        </div>
 
-        <div
-          className="book-glow absolute inset-0 rounded-[26px] opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-          style={{
-            background: 'radial-gradient(circle at center, rgba(229,91,60,0.12), transparent)',
-            pointerEvents: 'none'
-          }}
-        />
+          <h3 className="story-title">{story.title || '無標題故事'}</h3>
+
+          <div className="ribbon">
+            <svg viewBox="0 0 512 512" height="45" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id={`ribbonGrad${seed}`} x1="0" x2="1">
+                  <stop offset="0" stopColor="var(--color-brick-red)" />
+                  <stop offset="1" stopColor="var(--color-brick-red-dark)" />
+                </linearGradient>
+              </defs>
+              <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" fill={`url(#ribbonGrad${seed})`} stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+            </svg>
+          </div>
+
+          <div className="badge-star">
+            <span className="star-icon">✦</span>
+          </div>
+        </div>
+        
+        <div className="book-spine" />
       </div>
+      
+      <style jsx>{`
+        .card-wrapper {
+          width: 100%;
+          perspective: 1200px;
+          cursor: pointer;
+        }
+
+        .book-container {
+          width: 100%;
+          max-width: 200px;
+          height: 240px;
+          border-radius: var(--radius-lg);
+          transform-origin: center left;
+          transform-style: preserve-3d;
+          transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+          box-shadow: var(--shadow-xl), var(--shadow-glow);
+          background: var(--gradient-secondary);
+          overflow: visible;
+          position: relative;
+          border: 1px solid var(--color-border-primary);
+          padding-bottom: 20px;
+          z-index: 3;
+          will-change: transform, box-shadow;
+        }
+
+        .book-container:hover {
+          transform: translateY(-16px) rotateX(6deg) rotateY(-10deg) scale(1.05);
+          box-shadow: 0 32px 72px rgb(0 0 0 / 0.3), 0 16px 36px rgb(0 0 0 / 0.22), var(--shadow-glow-strong), 0 0 80px var(--color-gold-glow);
+        }
+
+        .book-cover {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          top: -2px;
+          left: 5px;
+          border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 6px;
+          overflow: hidden;
+          transform-origin: left center;
+          transition: transform var(--transition-slow);
+          backface-visibility: hidden;
+          transform-style: preserve-3d;
+          z-index: 6;
+          background-size: cover;
+          background-position: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .book-cover:hover {
+          transform: rotateY(-35deg) translateX(-2px) scale(1.02) translateZ(5px);
+        }
+
+        .pattern-container {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .pattern-svg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .story-title {
+          font-weight: 700;
+          color: var(--color-text-primary);
+          font-size: 2rem;
+          text-align: center;
+          padding: var(--spacing-lg);
+          z-index: 8;
+          position: relative;
+          text-shadow: var(--shadow-md);
+          font-family: "Cormorant Garamond", Georgia, serif;
+          margin: 0;
+        }
+
+        .ribbon {
+          position: absolute;
+          right: 16px;
+          top: -5px;
+          pointer-events: none;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+          transform-origin: top center;
+        }
+
+        .badge-star {
+          position: absolute;
+          left: var(--spacing-sm);
+          top: var(--spacing-sm);
+          width: 42px;
+          height: 42px;
+          border-radius: var(--radius-sm);
+          background: var(--gradient-primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: var(--shadow-lg), var(--shadow-glow);
+          border: 1px solid var(--color-border-primary);
+          animation: swing 3s ease-in-out infinite;
+        }
+
+        .star-icon {
+          font-size: 18px;
+          line-height: 1;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .book-spine {
+          position: absolute;
+          left: 10px;
+          top: -2px;
+          bottom: 10px;
+          width: calc(100% - 8px);
+          border-radius: var(--radius-lg);
+          background: var(--color-beige);
+          box-shadow: inset -6px 0 12px rgba(0, 0, 0, 0.2);
+          z-index: 1;
+        }
+
+        @keyframes swing {
+          0%, 100% { transform: rotate(-3deg); }
+          50% { transform: rotate(3deg); }
+        }
+      `}</style>
     </div>
   )
 }
