@@ -403,7 +403,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
 
       .quote-mark {
         position: absolute;
-        font-family: var(--font-mincho), serif;
+        font-family: BIZ UDPMincho, serif;
         font-size: 80px;
         font-weight: bold;
         color: var(--color-brown-text);
