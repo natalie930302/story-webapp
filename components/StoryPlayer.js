@@ -190,28 +190,38 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         
         {moduleHints && moduleHints.length > 0 && (
           <div className="modules-floating">
-            <div className="modules-content">
-              <span className="floating-label">建議使用</span>
-              {moduleHints.map((hint, idx) => {
-                const config = moduleConfig[hint];
+            <div className="modules-list">
+              {moduleHints.map((hintItem, idx) => {
+                let moduleKey = "";
+                let actionText = "";
+
+                if (typeof hintItem === 'string') {
+                    moduleKey = hintItem;
+                } else if (typeof hintItem === 'object' && hintItem !== null) {
+                    moduleKey = hintItem.module;
+                    actionText = hintItem.action;
+                }
+
+                const config = moduleConfig[moduleKey];
                 if (!config) return null;
                 return (
                   <div 
-                    key={`${hint}-${idx}`}
-                    className="module-badge"
+                    key={`${moduleKey}-${idx}`}
+                    className="module-card"
                     style={{ 
-                      background: `linear-gradient(
-                          120deg, 
-                          ${config.color} 0%, 
-                          color-mix(in srgb, ${config.color} 53%, transparent) 50%, 
-                          ${config.color} 100%
-                      )`,
-                      borderColor: config.color
+                      '--module-color': config.color,
+                      '--border-color': config.color
                     }}
-                    title={config.description}
                   >
-                    <span className="module-emoji">{config.icon}</span>
-                    <span className="module-name">{config.name}</span>
+                    <div className="module-icon-wrapper">
+                        <span className="module-emoji">{config.icon}</span>
+                    </div>
+                    <div className="module-info">
+                        <span className="module-name">{config.name}</span>
+                        {actionText && (
+                            <span className="module-action">{actionText}</span>
+                        )}
+                    </div>
                   </div>
                 );
               })}
@@ -375,9 +385,8 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         position: relative;
         padding: var(--spacing-2xl) 56px;
         background: var(--color-starlight-cream);
-        min-height: 280px;
+        min-height: 300px;
         display: flex;
-        align-items: center;
         overflow: hidden;
         box-shadow: var(--shadow-md);
         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -466,74 +475,96 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
 
       .modules-floating {
         position: absolute;
-        bottom: 20px;
-        right: 20px;
-        background: var(--color-starlight-cream);
-        backdrop-filter: blur(12px);
-        border-radius: var(--radius-md);
-        padding: var(--spacing-sm) 18px;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid var(--color-border-primary);
+        bottom: 24px;
+        right: 24px;
         z-index: 10;
-        animation: floatIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: floatIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        width: auto;
+        max-width: 300px;
+        transform-origin: bottom right;
+        pointer-events: none;
       }
 
-      .modules-content {
+      .modules-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-end;
+      }
+
+      .module-card {
+        pointer-events: auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 16px;
+        box-shadow: 
+          0 4px 20px -4px rgba(0, 0, 0, 0.1),
+          0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        width: fit-content;
+        max-width: 100%;
+      }
+      
+      .module-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 5px;
+        background: var(--module-color);
+        opacity: 1;
+      }
+
+      .module-card:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 32px -8px rgba(0,0,0,0.15);
+        background: #fff;
+      }
+
+      .module-icon-wrapper {
+        font-size: 22px;
+        width: 36px;
+        height: 36px;
+        background: color-mix(in srgb, var(--module-color) 12%, transparent);
+        border-radius: 10px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
+        justify-content: center;
+        flex-shrink: 0;
       }
 
-      .floating-label {
+      .module-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        flex: 1;
+        padding-top: 1px;
+      }
+
+      .module-name {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 800;
         color: var(--color-text-dark);
-        white-space: nowrap;
-      }
-
-      .module-badge {
+        line-height: 1.2;
         display: flex;
         align-items: center;
         gap: 6px;
-        padding: 6px var(--spacing-md);
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        animation: badgeFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
       }
 
-      .module-badge:nth-child(2) { animation-delay: 0.08s; }
-      .module-badge:nth-child(3) { animation-delay: 0.16s; }
-      .module-badge:nth-child(4) { animation-delay: 0.24s; }
-      .module-badge:nth-child(5) { animation-delay: 0.32s; }
-
-      @keyframes badgeFadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .module-badge:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-        filter: brightness(1.05);
-      }
-
-      .module-emoji {
-        font-size: 18px;
-        filter: drop-shadow(var(--shadow-sm));
-      }
-
-      .module-badge .module-name {
+      .module-action {
         font-size: 13px;
-        font-weight: 600;
         color: var(--color-text-dark);
+        opacity: 0.8;
+        line-height: 1.4;
+        font-weight: 500;
       }
 
       .progress-track {

@@ -173,27 +173,6 @@ export default function Modal({ isVisible, onClose, children }) {
           max-height: 90vh;
           padding: 40px;
           color: var(--color-text-primary);
-          scrollbar-width: thin;
-          scrollbar-color: var(--color-gold) var(--color-night-dark);
-        }
-
-        .modal-content::-webkit-scrollbar {
-          width: 6px;
-        }
-
-        .modal-content::-webkit-scrollbar-track {
-          background: var(--color-night-dark);
-          border-radius: 3px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-          background: var(--color-gold);
-          border-radius: 3px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb:hover {
-          background: var(--color-gold-light);
-          box-shadow: 0 0 12px var(--color-gold-glow);
         }
 
         @media (max-width: 640px) {
