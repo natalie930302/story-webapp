@@ -265,9 +265,8 @@ export default function IndexPage() {
       </div>
 
       {/* Modal section */}
-      {isModalVisible && (
-        <Modal isVisible={isModalVisible} onClose={closeModal}>
-          <div className="modal-header">
+      <Modal isVisible={isModalVisible} onClose={closeModal}>
+        <div className="modal-header">
             <h2 className="modal-title">
               <span>✨</span>
               <span>創造一本新故事書</span>
@@ -333,8 +332,7 @@ export default function IndexPage() {
               </button>
             </form>
           </div>
-        </Modal>
-      )}
+      </Modal>
 
       <style jsx>{`
         .header-section {

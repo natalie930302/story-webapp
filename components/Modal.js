@@ -1,10 +1,9 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 export default function Modal({ isVisible, onClose, children }) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [shouldRender, setShouldRender] = useState(false)
+  const [animationState, setAnimationState] = useState('closed') // 'closed' | 'opening' | 'open' | 'closing'
   const [mounted, setMounted] = useState(false)
   const ANIMATION_DURATION = 300
 
@@ -14,28 +13,45 @@ export default function Modal({ isVisible, onClose, children }) {
   }, [])
 
   useEffect(() => {
-    let t
+    let openTimer, closeTimer
+
     if (isVisible) {
-      setShouldRender(true)
-      t = setTimeout(() => setIsOpen(true), 10)
-    } else {
-      setIsOpen(false)
-      t = setTimeout(() => setShouldRender(false), ANIMATION_DURATION)
+      // 開始開啟動畫
+      setAnimationState('opening')
+      openTimer = setTimeout(() => {
+        setAnimationState('open')
+      }, 10)
+    } else if (animationState === 'open' || animationState === 'opening') {
+      // 開始關閉動畫
+      setAnimationState('closing')
+      closeTimer = setTimeout(() => {
+        setAnimationState('closed')
+      }, ANIMATION_DURATION)
     }
-    return () => clearTimeout(t)
+
+    return () => {
+      clearTimeout(openTimer)
+      clearTimeout(closeTimer)
+    }
   }, [isVisible])
 
-  if (!shouldRender && !isOpen) return null
+  // 不渲染的情況
+  if (animationState === 'closed') return null
   if (!mounted) return null
+
+  const isAnimatedOpen = animationState === 'open'
 
   const modalContent = (
     <div className="modal-wrapper">
       {/* Backdrop */}
-      <div className={`modal-backdrop ${isOpen ? 'open' : ''}`} />
+      <div 
+        className={`modal-backdrop ${isAnimatedOpen ? 'open' : ''}`} 
+        onClick={onClose}
+      />
 
       {/* Modal Panel */}
       <div 
-        className={`modal-panel ${isOpen ? 'open' : ''}`}
+        className={`modal-panel ${isAnimatedOpen ? 'open' : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button className="modal-close" onClick={onClose} aria-label="關閉">
@@ -75,7 +91,10 @@ export default function Modal({ isVisible, onClose, children }) {
           -webkit-backdrop-filter: blur(0px);
           cursor: pointer;
           opacity: 0;
-          transition: opacity var(--transition-base), backdrop-filter var(--transition-base);
+          transition: 
+            opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
+            backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1),
+            -webkit-backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1);
           pointer-events: auto;
         }
 
@@ -103,10 +122,13 @@ export default function Modal({ isVisible, onClose, children }) {
           max-height: 90vh;
           position: relative;
           z-index: 10000;
-          transition: all var(--transition-smooth);
+          transition: 
+            opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
+            transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+            filter 300ms cubic-bezier(0.4, 0, 0.2, 1);
           opacity: 0;
-          transform: scale(0.85) translateY(40px);
-          filter: blur(10px);
+          transform: scale(0.9) translateY(30px);
+          filter: blur(8px);
         }
 
         .modal-panel.open {
