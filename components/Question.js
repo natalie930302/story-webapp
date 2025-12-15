@@ -12,10 +12,10 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
 
   return (
     <>
-      <div className="question-container">
+      <div className="question-container appear">
         {/* Visual step indicators */}
         {totalQuestions > 1 && (
-          <div className="step-indicators">
+          <div className="step-indicators appear">
             {Array.from({ length: totalQuestions }).map((_, idx) => {
               const isCompleted = idx < currentIndex;
               const isCurrent = idx === currentIndex;
@@ -118,7 +118,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             gap: var(--spacing-sm);
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease-out;
             animation-delay: 0.1s;
           }
 
@@ -435,25 +434,9 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             100% { left: 100%; }
           }
 
-          @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-          }
-
           @keyframes checkmark-appear {
             from { opacity: 0; transform: scale(0.5); }
             to { opacity: 1; transform: scale(1); }
-          }
-
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
           }
 
           @keyframes pulseRingExpand {

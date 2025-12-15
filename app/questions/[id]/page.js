@@ -61,7 +61,7 @@ export default function QuestionsPage() {
 
   if(questions.length === 0) 
     return (
-    <div className="empty-questions-container">
+    <div className="empty-questions-container appear">
       <div className="empty-questions-content">
         <div className="empty-questions-icon">⚠️</div>
         <p className="empty-questions-title">無法載入提問</p>
@@ -80,7 +80,6 @@ export default function QuestionsPage() {
           align-items: center;
           height: 100%;
           padding: 64px 0;
-          animation: appear 0.6s ease-out;
         }
 
         .empty-questions-content {
@@ -116,17 +115,6 @@ export default function QuestionsPage() {
         .back-button:hover {
           transform: translateY(-2px);
         }
-
-        @keyframes appear {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
       `}</style>
     </div>
   );
@@ -135,32 +123,33 @@ export default function QuestionsPage() {
 
   return (
     <>
-      {/* Header */}
-      <div className="header-section">
-        <h1 className="page-title">
+      {/* Header section */}
+      <div className="header-section appear">
+        <h1 className="page-title appear">
           <span className="title-icon">✨</span>
           你的創作，你的故事線
           <span className="title-icon">✨</span>
         </h1>
-        <p className="page-subtitle">
+        <p className="page-subtitle appear">
           回答這些問題，讓您的故事更加獨特與私人化
         </p>
       </div>
 
-      {/* Question panel */}
-      <Question 
-        key={currentIndex} 
-        question={questions[currentIndex]} 
-        onAnswer={handleAnswer} 
-        isLastQuestion={currentIndex === questions.length - 1}
-        currentIndex={currentIndex}
-        totalQuestions={questions.length}
-      />
+      {/* Question section */}
+      <div className="question-section appear">
+        <Question 
+          key={currentIndex} 
+          question={questions[currentIndex]} 
+          onAnswer={handleAnswer} 
+          isLastQuestion={currentIndex === questions.length - 1}
+          currentIndex={currentIndex}
+          totalQuestions={questions.length}
+        />
+      </div>
 
       <style jsx>{`
         .header-section {
           margin-bottom: var(--spacing-xl);
-          animation: fadeInUp 0.6s ease-out;
         }
 
         .page-title {
@@ -176,7 +165,7 @@ export default function QuestionsPage() {
 
         .title-icon {
           font-size: clamp(2rem, 4vw, 2.5rem);
-          animation: floatIcon 3s ease-in-out infinite;
+          animation: float 3s ease-in-out infinite;
         }
 
         .page-subtitle {
@@ -185,24 +174,7 @@ export default function QuestionsPage() {
           font-size: clamp(0.9rem, 2vw, 1.1rem);
           line-height: 1.75;
           font-weight: 500;
-          animation: fadeInUp 0.6s ease-out;
           animation-delay: 0.15s;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes floatIcon {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
         }
       `}</style>
     </>

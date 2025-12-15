@@ -11,30 +11,37 @@ const modules = [
 export default function ModulesPage() {
   return (
     <>
-      <h1 className="page-title">🤖 數位互動模組</h1>
+      {/* Header section */}
+      <div className="header-section appear">
+        <h1 className="page-title appear">🤖 數位互動模組</h1>
+      </div>
 
-      <h2 className="section-title concept">模組設計理念</h2>
+      {/* Concept section */}
+      <div className="concept-section appear">
+        <h2 className="section-title appear">模組設計理念</h2>
+        <p className="description">
+          為了給予兒童有更好的媒介與故事互動，我們選用了像是風扇、熱燈、震動馬達等在感覺上具有明顯差異的模組。我們透過這些感官上的刺激，讓兒童能夠身臨其境。<br/>我們並未對於模組規定相對應的場景，皆由兒童自行想像發揮，於未來亦會增加更多的模組設計。
+        </p>
+      </div>
 
-      <p className="description">
-        為了給予兒童有更好的媒介與故事互動，我們選用了像是風扇、熱燈、震動馬達等在感覺上具有明顯差異的模組。我們透過這些感官上的刺激，讓兒童能夠身臨其境。<br/>我們並未對於模組規定相對應的場景，皆由兒童自行想像發揮，於未來亦會增加更多的模組設計。
-      </p>
-
-      <h2 className="section-title">現有感官模組</h2>
-
-      <div className="modules-grid">
-        {modules.map((mod, index) => (
-          <div
-            key={index}
-            className="module-card"
-            style={{ animationDelay: `${index * 0.08}s` }}
-          >
-            <div className="module-header">
-              <div className="module-icon">{mod.icon}</div>
-              <h3 className="module-name">{mod.name}</h3>
+      {/* Modules section */}
+      <div className="modules-section appear">
+        <h2 className="section-title appear">現有感官模組</h2>
+        <div className="modules-grid appear">
+          {modules.map((mod, index) => (
+            <div
+              key={index}
+              className="module-card appear"
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              <div className="module-header">
+                <div className="module-icon">{mod.icon}</div>
+                <h3 className="module-name">{mod.name}</h3>
+              </div>
+              <p className="module-description">{mod.description}</p>
             </div>
-            <p className="module-description">{mod.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <style jsx>{`
@@ -83,8 +90,6 @@ export default function ModulesPage() {
           border-radius: var(--radius-md);
           border: 2px solid var(--color-border-primary);
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.06);
-          transition: all var(--transition-smooth);
-          animation: appear 0.6s ease-out;
           cursor: pointer;
         }
 
@@ -118,17 +123,6 @@ export default function ModulesPage() {
           color: var(--color-text-dark);
           opacity: 0.8;
           margin: 0;
-        }
-
-        @keyframes appear {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
         }
       `}</style>
     </>

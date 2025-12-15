@@ -6,19 +6,29 @@ export default function EndPage() {
   const router = useRouter();
   return (
     <>
-      <div className="check-circle">
-        <svg width="60" height="60" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      <div className="end-container">
+        <div className="check-circle">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </div>
+
+        <h1 className="end-title">圓滿謝幕</h1>
+
+        <p className="end-message">感謝您的閱讀與互動！期待您下次的奇幻旅程。</p>
+
+        <button onClick={() => router.push('/')} className="home-button">
+          返回書架
+        </button>
       </div>
-
-      <h1 className="end-title">圓滿謝幕</h1>
-
-      <p className="end-message">感謝您的閱讀與互動！期待您下次的奇幻旅程。</p>
-
-      <button onClick={() => router.push('/')} className="home-button">
-        返回書架
-      </button>
-
       <style jsx>{`
+        .end-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          padding: 64px 0;
+        }
+        
         .check-circle {
           width: 120px;
           height: 120px;
@@ -68,17 +78,6 @@ export default function EndPage() {
         .home-button:hover {
           transform: translateY(-4px) scale(1.05);
           box-shadow: 0 20px 48px rgba(157, 121, 242, 0.5), 0 10px 24px rgba(242, 147, 176, 0.3), 0 0 32px var(--color-gold-glow);
-        }
-
-        @keyframes appear {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
         }
 
         @keyframes glowPulse {

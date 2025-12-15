@@ -31,20 +31,23 @@ export default function NewStoryPage() {
 
   return (
     <>
-      <div className="header-section">
-        <h1 className="page-title">
+      {/* Header section */}
+      <div className="header-section appear">
+        <h1 className="page-title appear">
           <span className="title-icon">🎬</span>
           你導演的新故事
           <span className="title-icon">🎬</span>
         </h1>
       </div>
 
-      {/* Story player */}
-      <StoryPlayer 
-        paragraphs={story.segments} 
-        onNext={() => router.push('/end')} 
-        buttonText="故事結局"
-      />
+      {/* Story player section */}
+      <div className="story-player-section appear">
+        <StoryPlayer 
+          paragraphs={story.segments} 
+          onNext={() => router.push('/end')} 
+          buttonText="故事結局"
+        />
+      </div>
 
       <style jsx>{`
         .header-section {
@@ -64,23 +67,7 @@ export default function NewStoryPage() {
 
         .title-icon {
           font-size: clamp(2rem, 4vw, 2.5rem);
-          animation: floatIcon 3s ease-in-out infinite;
-        }
-
-        @keyframes appear {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes floatIcon {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+          animation: float 3s ease-in-out infinite;
         }
       `}</style>
     </>

@@ -27,7 +27,7 @@ export default function StoryPage() {
 
   if (!story)
     return (
-      <div className="error-container">
+      <div className="error-container appear">
         <div className="error-content">
           <div className="error-icon">❌</div>
           <p className="error-title">故事載入失敗</p>
@@ -45,7 +45,6 @@ export default function StoryPage() {
             align-items: center;
             height: 100%;
             padding: 64px 0;
-            animation: appear 0.6s ease-out;
           }
 
           .error-content {
@@ -85,17 +84,6 @@ export default function StoryPage() {
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2), 0 6px 16px rgba(0, 0, 0, 0.15);
           }
-
-          @keyframes appear {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
         `}</style>
       </div>
     );
@@ -103,18 +91,20 @@ export default function StoryPage() {
   return (
     <>
       {/* Header section */}
-      <div className="header-section">
-        <h1 className="page-title">
+      <div className="header-section appear">
+        <h1 className="page-title appear">
           {story.title}
         </h1>
       </div>
       
-      {/* Story player */}
-      <StoryPlayer 
-        paragraphs={story.segments} 
-        onNext={() => router.push(`/questions/${id}`)} 
-        buttonText="開始互動問卷"
-      />
+      {/* Story player section */}
+      <div className="story-player-section appear">
+        <StoryPlayer 
+          paragraphs={story.segments} 
+          onNext={() => router.push(`/questions/${id}`)} 
+          buttonText="開始互動問卷"
+        />
+      </div>
 
       <style jsx>{`
         .header-section {
@@ -129,28 +119,6 @@ export default function StoryPage() {
           gap: var(--spacing-md);
           color: var(--color-text-primary);
           font-size: max(2rem,min(4vw,2.5rem));
-        }
-
-        @keyframes appear {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
         }
       `}</style>
     </>

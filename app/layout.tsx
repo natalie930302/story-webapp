@@ -4,8 +4,8 @@ import Sidebar from '../components/Sidebar';
 import StarfieldBackground from '../components/StarfieldBackground';
 
 export const metadata: Metadata = {
-  title: "溫馨故事屋",
-  description: "一個充滿故事與互動的溫暖空間",
+  title: "故事屋",
+  description: "打造獨一無二的故事情節與角色設定。",
 };
 
 export default function RootLayout({

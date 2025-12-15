@@ -10,6 +10,7 @@ export default function IndexPage() {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [isLoadingStories, setIsLoadingStories] = useState(true);
   
   const [isModalVisible, setIsModalVisible] = useState(false); 
   
@@ -18,7 +19,11 @@ export default function IndexPage() {
   useEffect(() => {
     fetch('/api/story')
       .then(res => res.json())
-      .then(data => setStories(data))
+      .then(data => {
+        setStories(data);
+        setIsLoadingStories(false);
+      })
+      .catch(() => setIsLoadingStories(false));
   }, [])
 
   const handleSelect = (id) => {
@@ -184,7 +189,7 @@ export default function IndexPage() {
           position: relative;
           z-index: 10;
           transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-          animation: floatIcon 3s ease-in-out infinite;
+          animation: float 3s ease-in-out infinite;
         }
 
         .create-story-card:hover .icon-wrapper {
@@ -219,11 +224,6 @@ export default function IndexPage() {
           75% { transform: translate(-15px, -20px) scale(1.1); opacity: 0.7; }
         }
         
-        @keyframes floatIcon {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
         @keyframes sparkle {
           0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
           50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
@@ -232,18 +232,24 @@ export default function IndexPage() {
     </div>
   )
 
+  if (isLoadingStories) {
+    return <LoadingPage message="正在載入故事收藏櫃..." />;
+  }
+
   return (
     <>
-      <div className="header">
-        <h1 className="page-title">
+      {/* Header section */}
+      <div className="header-section appear">
+        <h1 className="page-title appear">
           <span className="title-icon">📚</span>
           故事收藏櫃
         </h1>
       </div>
 
-      <div className="stories-grid">{stories.length > 0 ? (
+      {/* Stories section */}
+      <div className="stories-section appear">{stories.length > 0 ? (
           stories.map((story, idx) => (
-            <div key={story._id} className="story-item" style={{ animationDelay: `${idx * 0.08}s` }}>
+            <div key={story._id} className="story-item appear" style={{ animationDelay: `${idx * 0.2}s` }}>
               <StoryCard story={story} onClick={handleSelect} />
             </div>
           ))
@@ -253,11 +259,12 @@ export default function IndexPage() {
             <p>還沒有故事</p>
           </div>
         )}
-        <div className="story-item" style={{ animationDelay: `${stories.length * 0.08}s` }}>
+        <div className="story-item appear" style={{ animationDelay: `${stories.length * 0.2}s` }}>
           <CreateStoryCard />
         </div>
       </div>
 
+      {/* Modal section */}
       {isModalVisible && (
         <Modal isVisible={isModalVisible} onClose={closeModal}>
           <div className="modal-header">
@@ -330,9 +337,8 @@ export default function IndexPage() {
       )}
 
       <style jsx>{`
-        .header {
+        .header-section {
           margin-bottom: var(--spacing-xl);
-          animation: appear 0.6s ease-out;
         }
 
         .page-title {
@@ -348,7 +354,7 @@ export default function IndexPage() {
           font-size: 48px;
         }
 
-        .stories-grid {
+        .stories-section {
           width: 100%;
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -358,7 +364,6 @@ export default function IndexPage() {
 
         .story-item {
           padding: var(--spacing-md);
-          animation: appear 0.6s ease-out;
         }
 
         .empty-state {
@@ -503,17 +508,6 @@ export default function IndexPage() {
 
         @keyframes spin {
           to { transform: rotate(360deg); }
-        }
-
-        @keyframes appear {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
         }
       `}</style>
     </>

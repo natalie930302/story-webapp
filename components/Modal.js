@@ -31,10 +31,7 @@ export default function Modal({ isVisible, onClose, children }) {
   const modalContent = (
     <div className="modal-wrapper">
       {/* Backdrop */}
-      <div 
-        className={`modal-backdrop ${isOpen ? 'open' : ''}`}
-        onClick={onClose}
-      />
+      <div className={`modal-backdrop ${isOpen ? 'open' : ''}`} />
 
       {/* Modal Panel */}
       <div 

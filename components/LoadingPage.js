@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function LoadingPage({ message = "正在為您編寫獨特的故事..." }) {
   return (
-    <div className="loading-container">
+    <div className="loading-container appear">
       {/* Decorative animated SVG */}
       <div className="svg-wrapper">
         <svg 
@@ -35,7 +35,7 @@ export default function LoadingPage({ message = "正在為您編寫獨特的故�
           <div
             key={i}
             className="dot"
-            style={{ animationDelay: `${i * 0.3}s` }}
+            style={{ animationDelay: `${i * 0.2}s` }}
           />
         ))}
       </div>
@@ -48,7 +48,6 @@ export default function LoadingPage({ message = "正在為您編寫獨特的故�
           align-items: center;
           justify-content: center;
           padding: var(--spacing-xl);
-          animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .svg-wrapper {
@@ -108,16 +107,6 @@ export default function LoadingPage({ message = "正在為您編寫獨特的故�
           border-radius: 50%;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 14px rgba(242, 147, 176, 0.6);
           animation: dot-pulse 1.8s ease-in-out infinite;
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-12px); }
         }
 
         @keyframes slideInRight {

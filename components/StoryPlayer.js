@@ -156,6 +156,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
   const moduleHints = currentParagraph?.moduleHints;
 
   return (
+    <>
     <div className="player-container">
       <div className="player-header">
         <div className="header-container">
@@ -287,13 +288,14 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
           </svg>
         </button>
       </div>
+    </div>
+
     <style jsx>{`
       .player-container {
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
         padding: var(--spacing-md);
-        animation: fadeInUp 0.6s ease-out;
         display: flex;
         flex-direction: column;
       }
@@ -401,7 +403,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
 
       .quote-mark {
         position: absolute;
-        font-family: BIZ UDPMincho, serif;
+        font-family: var(--font-mincho), serif;
         font-size: 80px;
         font-weight: bold;
         color: var(--color-brown-text);
@@ -676,17 +678,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       /* Animations */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
       @keyframes progressShine {
         0% { left: -100%; }
         100% { left: 100%; }
@@ -734,6 +725,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         }
       }
     `}</style>
-    </div>
+    </>
   );
 }

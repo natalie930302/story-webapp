@@ -25,7 +25,7 @@ export default function Sidebar() {
                 key={item.href} 
                 href={item.href}
                 title={item.label}
-                style={{ animationDelay: `${0.1 + idx * 0.15}s` }}
+                style={{ animationDelay: `${0.2 + idx * 0.2}s` }}
               >
                 <div className={`nav-item ${isItemActive ? 'active' : ''}`}>
                   <span>{item.icon}</span>
