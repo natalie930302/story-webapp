@@ -189,7 +189,6 @@ export default function StoryCard({ story = {}, onClick }) {
           z-index: 8;
           position: relative;
           text-shadow: var(--shadow-md);
-          font-family: "Cormorant Garamond", Georgia, serif;
           margin: 0;
         }
 

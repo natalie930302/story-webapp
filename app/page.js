@@ -438,7 +438,6 @@ export default function IndexPage() {
           border-radius: var(--radius-sm);
           outline: none;
           transition: all var(--transition-smooth);
-          font-family: inherit;
         }
 
         .form-input:disabled,

@@ -346,7 +346,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             box-shadow: var(--shadow-md);
             transition: all var(--transition-smooth);
             color: var(--color-text-dark);
-            font-family: inherit;
             outline: none;
             transform: scale(1);
           }
