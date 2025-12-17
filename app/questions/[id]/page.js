@@ -151,7 +151,7 @@ export default function QuestionsPage() {
           <span className="title-icon">✨</span>
         </h1>
         <p className="page-subtitle appear">
-          回答這些問題，讓您的故事更加特別
+          回答這些問題，讓你的故事更加特別
         </p>
       </div>
 

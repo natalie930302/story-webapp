@@ -13,7 +13,7 @@ export default function EndPage() {
 
         <h1 className="end-title">圓滿謝幕</h1>
 
-        <p className="end-message">感謝您的閱讀與互動！期待您下次的奇幻旅程。</p>
+        <p className="end-message">感謝你的閱讀與互動！期待你下次的奇幻旅程。</p>
 
         <button onClick={() => router.push('/')} className="home-button">
           返回書架
