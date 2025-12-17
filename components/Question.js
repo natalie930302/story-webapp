@@ -217,7 +217,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
 
           .question-text {
             font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-            line-height: 1.85;
             margin: 0;
             font-weight: 500;
             color: var(--color-text-primary);
@@ -337,7 +336,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             width: 100%;
             resize: none;
             font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-            line-height: 1.85;
             border-radius: var(--radius-lg);
             min-height: 200px;
             border: 2px solid var(--color-border-light);

@@ -72,41 +72,43 @@ export default function IndexPage() {
   };
 
   const CreateStoryCard = () => (
-    <div 
-      className="create-story-card"
-      onClick={openModal}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal();
-        }
-      }}
-    >
-      <div className="sparkle-overlay" />
+    <>
+      <div 
+        className="create-story-card"
+        onClick={openModal}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal();
+          }
+        }}
+      >
+        <div className="sparkle-overlay" />
 
-      <div className="particle-background">
-        <div className="particle particle-1" />
-        <div className="particle particle-2" />
-        <div className="particle particle-3" />
+        <div className="particle-background">
+          <div className="particle particle-1" />
+          <div className="particle particle-2" />
+          <div className="particle particle-3" />
+        </div>
+
+        <div className="icon-wrapper">
+          <span className="sparkle-icon">✨</span>
+        </div>
+
+        <h3 className="card-title">創造<br/>新故事</h3>
       </div>
-
-      <div className="icon-wrapper">
-        <span className="sparkle-icon">✨</span>
-      </div>
-
-      <h3 className="card-title">創造新故事</h3>
 
       <style jsx>{`
         .create-story-card {
           width: 100%;
-          max-width: 200px;
-          height: 240px;
+          aspect-ratio: 3/4;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
+          gap: var(--spacing-md);
           background: linear-gradient(135deg, var(--color-night-light) 0%, var(--color-night-medium) 100%);
           border-radius: var(--radius-lg);
           border: 2px solid var(--color-border-light);
@@ -117,6 +119,7 @@ export default function IndexPage() {
           transition: all var(--transition-smooth);
           box-shadow: var(--shadow-lg);
           transform: translateY(0) scale(1);
+          container-type: inline-size;
         }
 
         .create-story-card:hover {
@@ -185,7 +188,6 @@ export default function IndexPage() {
         .icon-wrapper {
           font-size: 48px;
           color: var(--color-gold);
-          margin-bottom: 24px;
           position: relative;
           z-index: 10;
           transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -203,9 +205,7 @@ export default function IndexPage() {
 
         .card-title {
           font-weight: bold;
-          font-size: 24px;
-          line-height: 32px;
-          margin-bottom: 12px;
+          font-size: 18cqw;
           position: relative;
           z-index: 10;
           text-align: center;
@@ -229,7 +229,7 @@ export default function IndexPage() {
           50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
         }
       `}</style>
-    </div>
+    </>
   )
 
   if (isLoadingStories) {
@@ -355,7 +355,7 @@ export default function IndexPage() {
         .stories-section {
           width: 100%;
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
           gap: var(--spacing-lg);
           margin-bottom: var(--spacing-xl);
         }
@@ -387,7 +387,6 @@ export default function IndexPage() {
 
         .modal-title {
           font-size: 28px;
-          line-height: 36px;
           font-weight: bold;
           margin-bottom: var(--spacing-lg);
           display: flex;
@@ -431,7 +430,6 @@ export default function IndexPage() {
           width: 100%;
           padding: var(--spacing-sm) 18px;
           font-size: var(--text-base);
-          line-height: 1.5;
           color: var(--color-text-dark);
           background-color: rgba(245, 242, 234, 0.6);
           border: 2px solid var(--color-border-primary);

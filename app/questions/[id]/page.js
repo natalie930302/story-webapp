@@ -172,7 +172,6 @@ export default function QuestionsPage() {
           color: var(--color-text-secondary);
           text-align: center;
           font-size: clamp(0.9rem, 2vw, 1.1rem);
-          line-height: 1.75;
           font-weight: 500;
           animation-delay: 0.15s;
         }

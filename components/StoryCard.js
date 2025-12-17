@@ -93,7 +93,7 @@ export default function StoryCard({ story = {}, onClick }) {
           <h3 className="page-title">{story.title || '無標題故事'}</h3>
 
           <div className="ribbon">
-            <svg viewBox="0 0 512 512" height="45" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 384 512" width="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id={`ribbonGrad${seed}`} x1="0" x2="1">
                   <stop offset="0" stopColor="var(--color-neon-purple)" />
@@ -121,9 +121,8 @@ export default function StoryCard({ story = {}, onClick }) {
 
         .book-container {
           width: 100%;
-          max-width: 200px;
-          height: 240px;
-          border-radius: var(--radius-lg);
+          aspect-ratio: 3/4;
+          border-radius: 13%;
           transform-origin: center left;
           transform-style: preserve-3d;
           transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
@@ -132,7 +131,7 @@ export default function StoryCard({ story = {}, onClick }) {
           overflow: visible;
           position: relative;
           border: 1px solid var(--color-border-primary);
-          padding-bottom: 20px;
+          padding-bottom: 10%;
           z-index: 3;
           will-change: transform, box-shadow;
         }
@@ -146,9 +145,9 @@ export default function StoryCard({ story = {}, onClick }) {
           width: 100%;
           height: 100%;
           position: relative;
-          top: -2px;
-          left: 5px;
-          border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 6px;
+          top: -1%;
+          left: 3%;
+          border-radius: 12% 12% 12% 7%;
           overflow: hidden;
           transform-origin: left center;
           transition: transform var(--transition-slow);
@@ -160,10 +159,11 @@ export default function StoryCard({ story = {}, onClick }) {
           display: flex;
           align-items: center;
           justify-content: center;
+          container-type: inline-size;
         }
 
-        .book-cover:hover {
-          transform: rotateY(-35deg) translateX(-2px) scale(1.02) translateZ(5px);
+        .book-container:hover .book-cover {
+          transform: rotateY(-35deg) translateX(-3px) scale(1.02) translateZ(5px);
         }
 
         .pattern-container {
@@ -183,7 +183,7 @@ export default function StoryCard({ story = {}, onClick }) {
         .page-title {
           font-weight: 700;
           color: var(--color-text-primary);
-          font-size: 2rem;
+          font-size: 15cqw;
           text-align: center;
           padding: var(--spacing-lg);
           z-index: 8;
@@ -193,24 +193,22 @@ export default function StoryCard({ story = {}, onClick }) {
         }
 
         .ribbon {
+          width: 20%;
           position: absolute;
-          right: 16px;
-          top: -5px;
+          right: 12%;
+          top: -2%;
           pointer-events: none;
-          display: flex;
-          align-items: flex-start;
-          justify-content: center;
           filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
           transform-origin: top center;
         }
 
         .badge-star {
           position: absolute;
-          left: var(--spacing-sm);
-          top: var(--spacing-sm);
-          width: 42px;
-          height: 42px;
-          border-radius: var(--radius-sm);
+          left: 8%;
+          top: 8%;
+          width: 20%;
+          aspect-ratio: 1/1;
+          border-radius: 25%;
           background: var(--gradient-primary);
           display: flex;
           align-items: center;
@@ -218,21 +216,21 @@ export default function StoryCard({ story = {}, onClick }) {
           box-shadow: var(--shadow-lg), var(--shadow-glow);
           border: 1px solid var(--color-border-primary);
           animation: swing 3s ease-in-out infinite;
+          container-type: inline-size;
         }
 
         .star-icon {
-          font-size: 18px;
-          line-height: 1;
+          font-size: 60cqw;
           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         .book-spine {
           position: absolute;
-          left: 10px;
-          top: -2px;
-          bottom: 10px;
+          left: 5%;
+          top: -1%;
+          bottom: 4%;
           width: calc(100% - 8px);
-          border-radius: var(--radius-lg);
+          border-radius: 10%;
           background: var(--color-starlight-cream);
           box-shadow: inset -6px 0 12px rgba(0, 0, 0, 0.2);
           z-index: 1;

@@ -55,7 +55,6 @@ export default function EndPage() {
 
         .end-message {
           font-size: clamp(1rem, 2vw, 1.25rem);
-          line-height: 1.75;
           color: var(--color-text-secondary);
           opacity: 0.8;
           margin-bottom: 40px;

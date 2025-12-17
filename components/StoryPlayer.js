@@ -417,7 +417,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         font-weight: bold;
         color: var(--color-brown-text);
         opacity: 0.18;
-        line-height: 1;
         user-select: none;
         pointer-events: none;
       }
@@ -443,7 +442,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
 
       .text-content {
         font-size: 22px;
-        line-height: 2.0;
         color: var(--color-text-dark);
         position: relative;
         z-index: 1;
@@ -553,7 +551,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         font-size: 14px;
         font-weight: 800;
         color: var(--color-text-dark);
-        line-height: 1.2;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -563,7 +560,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         font-size: 13px;
         color: var(--color-text-dark);
         opacity: 0.8;
-        line-height: 1.4;
         font-weight: 500;
       }
 

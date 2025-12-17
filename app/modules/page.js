@@ -48,7 +48,6 @@ export default function ModulesPage() {
         .page-title {
           font-size: max(2rem,min(4vw,2.5rem));
           font-weight: 900;
-          line-height: 1.2;
           margin-bottom: var(--spacing-xl);
           color: var(--color-text-primary);
           text-align: center;
@@ -58,7 +57,6 @@ export default function ModulesPage() {
         .section-title {
           font-size: clamp(1.5rem, 3vw, 1.875rem);
           font-weight: 700;
-          line-height: 1.375;
           margin-bottom: var(--spacing-md);
           color: var(--color-text-primary);
           text-align: center;
@@ -66,7 +64,6 @@ export default function ModulesPage() {
 
         .description {
           font-size: 17px;
-          line-height: 1.75;
           margin-bottom: 48px;
           color: var(--color-text-secondary);
           text-align: center;
@@ -107,7 +104,6 @@ export default function ModulesPage() {
 
         .module-icon {
           font-size: 32px;
-          line-height: 1;
         }
 
         .module-name {
@@ -119,7 +115,6 @@ export default function ModulesPage() {
 
         .module-description {
           font-size: 15px;
-          line-height: 1.7;
           color: var(--color-text-dark);
           opacity: 0.8;
           margin: 0;
