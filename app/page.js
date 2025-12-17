@@ -186,7 +186,6 @@ export default function IndexPage() {
         }
 
         .icon-wrapper {
-          font-size: 48px;
           color: var(--color-gold);
           position: relative;
           z-index: 10;
@@ -199,13 +198,12 @@ export default function IndexPage() {
         }
 
         .sparkle-icon {
-          font-size: 48px;
+          font-size: var(--text-5xl);
           animation: sparkle 2s ease-in-out infinite;
         }
 
         .card-title {
-          font-weight: bold;
-          font-size: 18cqw;
+          font-size: var(--text-2xl);
           position: relative;
           z-index: 10;
           text-align: center;
@@ -233,7 +231,7 @@ export default function IndexPage() {
   )
 
   if (isLoadingStories) {
-    return <LoadingPage message="正在載入故事收藏櫃..." />;
+    return <LoadingPage message="正在載入故事收藏櫃" />;
   }
 
   return (
@@ -327,7 +325,10 @@ export default function IndexPage() {
                     <span>正在生成你的故事...</span>
                   </>
                 ) : (
-                  <span>✨確認並生成故事</span>
+                  <>
+                    <span>✨</span>
+                    <span>確認並生成故事</span>
+                  </>
                 )}
               </button>
             </form>
@@ -340,16 +341,11 @@ export default function IndexPage() {
         }
 
         .page-title {
-          font-weight: bold;
           display: flex;
           align-items: center;
           gap: var(--spacing-md);
           color: var(--color-text-primary);
-          font-size: max(2rem,min(4vw,2.5rem));
-        }
-
-        .title-icon {
-          font-size: 48px;
+          font-size: var(--text-5xl);
         }
 
         .stories-section {
@@ -365,7 +361,7 @@ export default function IndexPage() {
         }
 
         .empty-state {
-          font-size: max(1.25rem,min(2.5vw,1.75rem));
+          font-size: var(--text-2xl);
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -377,8 +373,8 @@ export default function IndexPage() {
         }
 
         .empty-icon {
-          font-size: 64px;
-          margin-bottom: 16px;
+          font-size: var(--text-6xl);
+          margin-bottom: var(--spacing-md);
         }
 
         .modal-header {
@@ -386,8 +382,7 @@ export default function IndexPage() {
         }
 
         .modal-title {
-          font-size: 28px;
-          font-weight: bold;
+          font-size: var(--text-3xl);
           margin-bottom: var(--spacing-lg);
           display: flex;
           align-items: center;
@@ -414,21 +409,19 @@ export default function IndexPage() {
           justify-content: space-between;
           align-items: center;
           font-size: var(--text-base);
-          font-weight: 600;
           margin-bottom: var(--spacing-xs);
           color: var(--color-gold-dark);
         }
 
         .char-count {
           color: var(--color-text-secondary);
-          font-weight: 500;
           font-size: var(--text-sm);
         }
 
         .form-input,
         .form-textarea {
           width: 100%;
-          padding: var(--spacing-sm) 18px;
+          padding: var(--spacing-sm) var(--spacing-md);
           font-size: var(--text-base);
           color: var(--color-text-dark);
           background-color: rgba(245, 242, 234, 0.6);
@@ -459,7 +452,6 @@ export default function IndexPage() {
           width: 100%;
           padding: var(--spacing-md) var(--spacing-xl);
           font-size: var(--text-lg);
-          font-weight: 600;
           color: var(--color-text-primary);
           background: var(--gradient-secondary);
           border: none;

@@ -26,29 +26,11 @@
   --color-gold-glow: rgba(255, 215, 0, 0.7); /* 強烈但柔和擴散的金色光暈 */
 
   /* 淺色系 - 星塵/雲朵 (Light Dust/Cloud) */
-  --color-starlight-cream: #f5f2ea; /* 淺色文字/內容區背景 (高對比區塊) */
+  --color-starlight-cream: #f5f2ea;
   --color-starlight-medium: #e8e5dd;
   --color-starlight-dark: #d4d1c9;
-  --color-brown-text: #2a1f1d; /* 深色文字用於淺背景 */
 
-  /* 舊的顏色映射到新的主題色，確保兼容性 */
-  --color-brick-red: var(--color-neon-pink);
-  --color-brick-red-light: var(--color-neon-pink);
-  --color-brick-red-dark: var(--color-neon-purple);
-  --color-brick-red-ultra: var(--color-neon-purple);
-  --color-turquoise: var(--color-neon-teal);
-  --color-turquoise-light: var(--color-neon-teal);
-  --color-turquoise-dark: var(--color-night-light);
-  --color-turquoise-ultra: var(--color-night-dark);
-  --color-pink-orange: var(--color-neon-pink);
-  --color-pink-orange-light: var(--color-neon-pink);
-  --color-pink-orange-dark: var(--color-neon-purple);
-  --color-beige: var(--color-starlight-cream);
-  --color-beige-dark: var(--color-starlight-medium);
-  --color-beige-darker: var(--color-starlight-dark);
-  --color-brown-cream: var(--color-brown-text);
-
-  /* 背景顏色替換為夜空藍 */
+  /* 背景顏色 - 夜空藍 */
   --color-bg-dark: var(--color-night-dark);
   --color-bg-medium: var(--color-night-medium);
   --color-bg-light: var(--color-night-light);
@@ -56,18 +38,19 @@
 
   /* 文字顏色 */
   --color-text-primary: var(--color-starlight-cream);
-  --color-text-secondary: rgba(245, 242, 234, 0.85);
-  --color-text-muted: rgba(245, 242, 234, 0.6);
-  --color-text-dark: var(--color-brown-text);
+  --color-text-secondary: var(--color-starlight-medium);
+  --color-text-muted: var(--color-starlight-dark);
+  --color-text-dark: var(--color-text-brown);
   --color-text-accent: var(--color-neon-blue);
+  --color-text-brown: #2a1f1d;
 
-  /* 邊框與分隔線 (使用柔和金光) */
+  /* 邊框與分隔線 */
   --color-border-primary: rgba(255, 215, 0, 0.4);
   --color-border-light: rgba(255, 215, 0, 0.3);
   --color-border-lighter: rgba(255, 215, 0, 0.15);
   --color-border-turquoise: rgba(117, 242, 235, 0.4);
 
-  /* 覆蓋與半透明 (調整為深藍紫) */
+  /* 覆蓋與半透明 */
   --overlay-dark: rgba(18, 24, 56, 0.95);
   --overlay-medium: rgba(31, 42, 82, 0.9);
   --overlay-light: rgba(50, 64, 117, 0.8);
@@ -80,8 +63,23 @@
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
   --spacing-3xl: 64px;
+  --spacing-4xl: 80px;
+  --spacing-5xl: 96px;
 
-  /* 圓角 - 統一設計，確保一致性 */
+  /* 字體大小系統 */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
+  --text-6xl: 3.75rem; /* 60px */
+  --text-7xl: 4.5rem; /* 72px */
+  --text-8xl: 6rem; /* 96px */
+
+  /* 圓角 */
   --radius-xs: 8px;
   --radius-sm: 12px;
   --radius-md: 20px;
@@ -89,13 +87,13 @@
   --radius-xl: 32px;
   --radius-full: 9999px;
 
-  /* 過渡效果 - 統一流暢 (彈跳效果) */
+  /* 動畫過渡效果 */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); /* 統一動畫 */
+  --transition-smooth: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* 陰影系統 - 調整為強調金光和霓虹光暈 */
+  /* 陰影和光暈 */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -165,8 +163,9 @@
 }
 
 @font-face {
-  font-family: 'Genssen Rounded Font'; 
-  src: url('../public/fonts/BpmfGenSenRounded-R.ttf') format('woff2');
+  font-family: "Genssen Rounded Font";
+  src: url("../public/fonts/BpmfGenSenRounded-R.ttf") format("woff2");
+  unicode-range: U+4E00-9FFF;
 }
 
 body {
@@ -174,7 +173,6 @@ body {
   padding: 0;
   font-family: "Genssen Rounded Font", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
   line-height: 1.5;
-  letter-spacing: 0.3em;
   background: var(--gradient-bg);
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
@@ -215,19 +213,19 @@ body {
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translateY(6px);
   }
   50% {
-    transform: translateY(-12px);
+    transform: translateY(-6px);
   }
 }
 
 @keyframes shimmer {
   0% {
-    background-position: -1000px 0;
+    background-position: -100% 0;
   }
   100% {
-    background-position: 1000px 0;
+    background-position: 100% 0;
   }
 }
 

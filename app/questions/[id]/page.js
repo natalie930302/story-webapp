@@ -19,9 +19,31 @@ export default function QuestionsPage() {
     fetch(`/api/story/${id}/questions`)
       .then(res => res.json())
       .then(data => {
-        const shuffled = data.modificationQuestions.sort(() => Math.random() - 0.5);
-        const randomCount = Math.floor(Math.random() * 3) + 4; 
-        setQuestions(shuffled.slice(0, randomCount));
+        // Store original questions with their indices
+        const questionsWithIndex = data.questions.map((q, idx) => ({ ...q, originalIndex: idx }));
+        
+        // Shuffle and apply smart filtering
+        const shuffled = questionsWithIndex.sort(() => Math.random() - 0.5);
+        const randomCount = Math.floor(Math.random() * 3) + 4;
+        
+        // Select questions while avoiding incompatible pairs
+        const selectedQuestions = [];
+        const excludedIndices = new Set();
+        
+        for (let q of shuffled) {
+          if (excludedIndices.has(q.originalIndex)) continue;
+          
+          selectedQuestions.push(q);
+          
+          // Mark incompatible questions as excluded
+          if (q.incompatibleWith && Array.isArray(q.incompatibleWith)) {
+            q.incompatibleWith.forEach(idx => excludedIndices.add(idx));
+          }
+          
+          if (selectedQuestions.length >= randomCount) break;
+        }
+        
+        setQuestions(selectedQuestions);
         setIsLoadingQuestions(false);
       })
       .catch(() => setIsLoadingQuestions(false));
@@ -57,7 +79,7 @@ export default function QuestionsPage() {
     }
   };
 
-  if(isLoadingQuestions) return <LoadingPage message="正在準備您的獨特提問" />;
+  if(isLoadingQuestions) return <LoadingPage message="正在準備互動問題" />;
 
   if(questions.length === 0) 
     return (
@@ -79,7 +101,7 @@ export default function QuestionsPage() {
           justify-content: center;
           align-items: center;
           height: 100%;
-          padding: 64px 0;
+          padding: var(--spacing-3xl) 0;
         }
 
         .empty-questions-content {
@@ -87,21 +109,19 @@ export default function QuestionsPage() {
         }
 
         .empty-questions-icon {
-          font-size: 64px;
-          margin-bottom: 16px;
+          font-size: var(--text-5xl);
+          margin-bottom: var(--spacing-md);
         }
 
         .empty-questions-title {
-          font-size: max(1.25rem,min(2.5vw,1.75rem));
-          font-weight: 600;
+          font-size: var(--text-2xl);
           color: var(--color-starlight-cream);
-          margin-bottom: 16px;
+          margin-bottom: var(--spacing-md);
         }
 
         .back-button {
           padding: var(--spacing-sm) var(--spacing-lg);
           font-size: var(--text-lg);
-          font-weight: 600;
           color: #fff;
           background: linear-gradient(135deg, #e55b3c 0%, #d87885 100%);
           border: none;
@@ -109,7 +129,7 @@ export default function QuestionsPage() {
           cursor: pointer;
           transition: all 0.3s ease;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          margin-top: 16px;
+          margin-top: var(--spacing-md);
         }
 
         .back-button:hover {
@@ -119,7 +139,7 @@ export default function QuestionsPage() {
     </div>
   );
 
-  if(isLoading) return <LoadingPage message="您的故事正在根據您的選擇進行編寫與塑造" />;
+  if(isLoading) return <LoadingPage message="正在改編新故事" />;
 
   return (
     <>
@@ -131,7 +151,7 @@ export default function QuestionsPage() {
           <span className="title-icon">✨</span>
         </h1>
         <p className="page-subtitle appear">
-          回答這些問題，讓您的故事更加獨特與私人化
+          回答這些問題，讓您的故事更加特別
         </p>
       </div>
 
@@ -153,26 +173,23 @@ export default function QuestionsPage() {
         }
 
         .page-title {
-          font-weight: bold;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: var(--spacing-md);
           color: var(--color-text-primary);
-          font-size: max(2rem,min(4vw,2.5rem));
+          font-size: var(--text-5xl);
           margin-bottom: var(--spacing-md);
         }
 
         .title-icon {
-          font-size: clamp(2rem, 4vw, 2.5rem);
           animation: float 3s ease-in-out infinite;
         }
 
         .page-subtitle {
           color: var(--color-text-secondary);
           text-align: center;
-          font-size: clamp(0.9rem, 2vw, 1.1rem);
-          font-weight: 500;
+          font-size: var(--text-lg);
           animation-delay: 0.15s;
         }
       `}</style>

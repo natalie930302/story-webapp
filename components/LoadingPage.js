@@ -1,7 +1,7 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-export default function LoadingPage({ message = "正在為您編寫獨特的故事..." }) {
+export default function LoadingPage({ message = "Loading" }) {
   return (
     <div className="loading-container appear">
       {/* Decorative animated SVG */}
@@ -87,17 +87,17 @@ export default function LoadingPage({ message = "正在為您編寫獨特的故�
         .loading-message {
           color: var(--color-starlight-cream);
           text-shadow: 0 0 20px var(--color-gold-glow);
-          font-weight: 600;
           text-align: center;
-          margin-bottom: var(--spacing-md);
-          font-size: max(1.25rem,min(2.5vw,1.75rem));
+          margin-bottom: var(--spacing-lg);
+          font-size: var(--text-2xl);
         }
 
         .dots-container {
           padding: var(--spacing-md);
           display: flex;
-          gap: 8px;
+          gap: var(--spacing-xs);
           justify-content: center;
+          margin-bottom: var(--spacing-lg);
         }
 
         .dot {

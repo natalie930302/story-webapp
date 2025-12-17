@@ -90,7 +90,12 @@ export default function StoryCard({ story = {}, onClick }) {
             </svg>
           </div>
 
-          <h3 className="page-title">{story.title || '無標題故事'}</h3>
+          <h3 
+            className="page-title" 
+            style={{ fontSize: `${Math.min(18, Math.max(10, 18 - (story.title?.length || 0)))}cqw` }}
+          >
+            {story.title || '無標題故事'}
+          </h3>
 
           <div className="ribbon">
             <svg viewBox="0 0 384 512" width="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
@@ -181,11 +186,13 @@ export default function StoryCard({ story = {}, onClick }) {
         }
 
         .page-title {
-          font-weight: 700;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
           color: var(--color-text-primary);
-          font-size: 15cqw;
           text-align: center;
-          padding: var(--spacing-lg);
+          padding: var(--spacing-sm) var(--spacing-lg);
           z-index: 8;
           position: relative;
           text-shadow: var(--shadow-md);
@@ -220,7 +227,7 @@ export default function StoryCard({ story = {}, onClick }) {
         }
 
         .star-icon {
-          font-size: 60cqw;
+          font-size: var(--text-xl);
           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 

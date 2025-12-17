@@ -54,7 +54,7 @@ export default function Modal({ isVisible, onClose, children }) {
         className={`modal-panel ${isAnimatedOpen ? 'open' : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="modal-close" onClick={onClose} aria-label="關閉">
+        <button className="modal-close" onClick={onClose}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -139,8 +139,8 @@ export default function Modal({ isVisible, onClose, children }) {
 
         .modal-close {
           position: absolute;
-          top: var(--spacing-md);
-          right: var(--spacing-md);
+          top: var(--spacing-lg);
+          right: var(--spacing-lg);
           width: 40px;
           height: 40px;
           border-radius: var(--radius-full);
@@ -171,7 +171,7 @@ export default function Modal({ isVisible, onClose, children }) {
         .modal-content {
           overflow-y: auto;
           max-height: 90vh;
-          padding: 40px;
+          padding: var(--spacing-2xl);
           color: var(--color-text-primary);
         }
 

@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
 const SENTENCE_SPLIT_REGEX = /([。？！.?!；;，\r\n\uFE30-\uFFA0()（）「」]+)/g;
-const PUNCTUATION_REGEX = /^[。？！.?!；;，\r\n\uFE30-\uFFA0()（）「」]+$/;
 
 const moduleConfig = {
   wind: { 
@@ -31,22 +30,22 @@ const moduleConfig = {
   },
 };
 
-export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一段" }) {
+export default function StoryPlayer({ segments, onNext, buttonText = "下一段" }) {
   const [index, setIndex] = useState(0); 
   const [isPlaying, setIsPlaying] = useState(false); 
-  const [currentSegmentIndex, setCurrentSegmentIndex] = useState(-1); 
+  const [currentTextIndex, setCurrentTextIndex] = useState(-1); 
   const [slideDirection, setSlideDirection] = useState('forward');
 
   const synthRef = useRef(typeof window !== 'undefined' ? window.speechSynthesis : null);
   const utteranceRef = useRef(null);
 
-  const currentParagraph = paragraphs[index];
-  const currentText = currentParagraph?.text || '';
-  const segments = useMemo(() => 
+  const currentSegment = segments[index];
+  const currentText = currentSegment?.text || '';
+  const currentTextArray = useMemo(() => 
     currentText.split(SENTENCE_SPLIT_REGEX).filter(s => s.trim().length > 0),
     [currentText]
   );
-  const isPunctuation = (segment) => PUNCTUATION_REGEX.test(segment);
+  const currentModuleHints = currentSegment?.moduleHints;
 
   const stopAudio = useCallback(() => {
     if (synthRef.current) {
@@ -56,7 +55,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       utteranceRef.current = null;
     }
     setIsPlaying(false);
-    setCurrentSegmentIndex(-1);
+    setCurrentTextIndex(-1);
   }, []);
 
   const playAudio = useCallback((text) => {
@@ -66,7 +65,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
     stopAudio();
 
     let charOffset = 0;
-    const segmentOffsets = segments.map(segment => {
+    const segmentOffsets = currentTextArray.map(segment => {
       const start = charOffset;
       charOffset += segment.length;
       return { start, length: segment.length };
@@ -87,7 +86,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         const seg = segmentOffsets[mid];
         
         if (absCharIndex >= seg.start && absCharIndex < seg.start + seg.length) {
-          setCurrentSegmentIndex(mid);
+          setCurrentTextIndex(mid);
           break;
         } else if (absCharIndex < seg.start) {
           right = mid - 1;
@@ -99,23 +98,23 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
     
     utterance.onstart = () => {
       setIsPlaying(true);
-      setCurrentSegmentIndex(0);
+      setCurrentTextIndex(0);
     };
     
     utterance.onend = () => {
       setIsPlaying(false);
-      setCurrentSegmentIndex(-1);
+      setCurrentTextIndex(-1);
       utteranceRef.current = null;
     };
 
     utterance.onerror = () => {
       setIsPlaying(false);
-      setCurrentSegmentIndex(-1);
+      setCurrentTextIndex(-1);
       utteranceRef.current = null;
     };
 
     synth.speak(utterance);
-  }, [segments, stopAudio]);
+  }, [currentTextArray, stopAudio]);
 
   useEffect(() => {
     stopAudio();
@@ -137,7 +136,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
 
   const handleNext = () => {
     stopAudio();
-    if (index < paragraphs.length - 1) {
+    if (index < segments.length - 1) {
       setSlideDirection('forward');
       setIndex(index + 1);
     } else {
@@ -153,8 +152,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
     }
   };
 
-  const moduleHints = currentParagraph?.moduleHints;
-
   return (
     <>
     <div className="player-container">
@@ -163,20 +160,10 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
           <div className="header-icon">🎧</div>
           <h2 className="header-title">故事閱讀器</h2>
         </div>
-        <div className="progress">
-          <div className="progress-track">
-            <div 
-              className="progress-bar"
-              style={{ width: `${((index + 1) / paragraphs.length) * 100}%` }}
-            >
-            </div>
-            <div className="progress-shine" />
-          </div>
-          <div className="progress-info">
-            <span className="progress-label">第 {index + 1} 段</span>
-            <span className="progress-divider">/</span>
-            <span className="progress-total">共 {paragraphs.length} 段</span>
-          </div>
+        <div className="progress-info">
+          <span className="progress-label">第 {index + 1} 段</span>
+          <span className="progress-divider">/</span>
+          <span className="progress-total">共 {segments.length} 段</span>
         </div>
       </div>
 
@@ -188,10 +175,10 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         <div className="quote-mark quote-left">"</div>
         <div className="quote-mark quote-right">"</div>
         
-        {moduleHints && moduleHints.length > 0 && (
+        {currentModuleHints && currentModuleHints.length > 0 && (
           <div className="modules-floating">
             <div className="modules-list">
-              {moduleHints.map((hintItem, idx) => {
+              {currentModuleHints.map((hintItem, idx) => {
                 let moduleKey = "";
                 let actionText = "";
 
@@ -230,13 +217,12 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         )}
         
         <div className="text-content">
-          {segments.length === 0 ? (
+          {currentTextArray.length === 0 ? (
             <p className="empty-text">等待故事內容...</p>
           ) : (
-            segments.map((segment, i) => {
-              const shouldHighlight = i === currentSegmentIndex && !isPunctuation(segment);
+            currentTextArray.map((segment, i) => {
               return (
-                <span key={i} className={shouldHighlight ? 'text-segment highlighted' : 'text-segment'}>
+                <span key={i} className={i === currentTextIndex ? 'text-segment highlighted' : 'text-segment'}>
                   {segment}
                 </span>
               );
@@ -245,18 +231,26 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         </div>
       </div>
 
+      <div className="progress-track">
+        <div 
+          className="progress-bar"
+          style={{ width: `${((index + 1) / segments.length) * 100}%` }}
+        >
+        </div>
+        <div className="progress-shine" />
+      </div>
+
       <div className="controls-card">
         <button 
           onClick={handlePrevious} 
-          disabled={index === 0} 
-          aria-label="上一段"
+          disabled={index === 0}
           className={`control-btn btn-nav btn-prev ${index === 0 ? 'disabled' : ''}`}
         >
-          <svg className="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <svg className="btn-icon" width="15" height="15" viewBox="6 4 12 16" fill="none">
             <path 
               d="M15 18l-6-6 6-6" 
               stroke="currentColor" 
-              strokeWidth="2.5" 
+              strokeWidth="1.5" 
               strokeLinecap="round" 
               strokeLinejoin="round"
             />
@@ -265,8 +259,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         </button>
 
         <button 
-          onClick={togglePlay} 
-          aria-label={isPlaying ? '停止播放' : '開始播放'} 
+          onClick={togglePlay}
           className={`control-btn btn-play ${isPlaying ? 'playing' : ''}`}
         >
           {isPlaying ? (
@@ -282,16 +275,15 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         </button>
 
         <button 
-          onClick={handleNext} 
-          aria-label={index < paragraphs.length - 1 ? '下一段' : buttonText || '故事結束'} 
+          onClick={handleNext}
           className="control-btn btn-nav btn-next"
         >
-          <span className="btn-text">{index < paragraphs.length - 1 ? '下一段' : (buttonText || '故事結束')}</span>
-          <svg className="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <span className="btn-text">{index < segments.length - 1 ? '下一段' : (buttonText || '故事結束')}</span>
+          <svg className="btn-icon" width="15" height="15" viewBox="6 4 12 16" fill="none">
             <path 
               d="M9 6l6 6-6 6" 
               stroke="currentColor" 
-              strokeWidth="2.5" 
+              strokeWidth="1.5" 
               strokeLinecap="round" 
               strokeLinejoin="round"
             />
@@ -303,9 +295,8 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
     <style jsx>{`
       .player-container {
         width: 100%;
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
-        padding: var(--spacing-md);
         display: flex;
         flex-direction: column;
       }
@@ -314,7 +305,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px var(--spacing-lg);
+        padding: var(--spacing-lg);
         background: var(--gradient-dark);
         border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         box-shadow: var(--shadow-sm);
@@ -335,7 +326,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         align-items: center;
         justify-content: center;
         box-shadow: var(--shadow-glow);
-        font-size: 26px;
+        font-size: var(--text-3xl);
         animation: iconFloat 3s ease-in-out infinite;
       }
 
@@ -349,43 +340,28 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .header-title {
-        font-size: 24px;
-        font-weight: 800;
+        font-size: var(--text-2xl);
         color: var(--color-starlight-cream);
         margin: 0;
-      }
-
-      .progress {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-md);
       }
       
       .progress-info {
         display: flex;
         align-items: center;
         gap: var(--spacing-xs);
-        font-size: 15px;
+        font-size: var(--text-base);
         color: var(--color-starlight-cream);
-      }
-
-      .progress-label {
-        font-weight: 600;
       }
 
       .progress-divider {
         color: var(--color-starlight-medium);
       }
 
-      .progress-total {
-        font-weight: 600;
-      }
-
       .text-card {
         position: relative;
-        padding: var(--spacing-2xl) 56px;
+        padding: var(--spacing-2xl) var(--spacing-3xl);
         background: var(--color-starlight-cream);
-        min-height: 300px;
+        min-height: 290px;
         display: flex;
         overflow: hidden;
         box-shadow: var(--shadow-md);
@@ -402,9 +378,9 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
           repeating-linear-gradient(
             to bottom,
             transparent 0px,
-            transparent 39px,
-            var(--color-beige-dark) 39px,
-            var(--color-beige-darker) 40px
+            transparent 44px,
+            var(--color-starlight-dark) 44px,
+            var(--color-starlight-dark) 45px
           );
         pointer-events: none;
         opacity: 0.25;
@@ -413,22 +389,21 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       .quote-mark {
         position: absolute;
         font-family: BIZ UDPMincho, serif;
-        font-size: 80px;
-        font-weight: bold;
-        color: var(--color-brown-text);
+        font-size: var(--text-7xl);
+        color: var(--color-text-brown);
         opacity: 0.18;
         user-select: none;
         pointer-events: none;
       }
 
       .quote-left {
-        top: 20px;
-        left: 24px;
+        top: var(--spacing-md);
+        left: var(--spacing-lg);
       }
 
       .quote-right {
-        bottom: 20px;
-        right: 24px;
+        bottom: var(--spacing-md);
+        right: var(--spacing-lg);
         transform: rotate(180deg);
       }
 
@@ -441,44 +416,41 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .text-content {
-        font-size: 22px;
+        font-size: var(--text-2xl);
+        line-height: 1.8;
         color: var(--color-text-dark);
         position: relative;
         z-index: 1;
         width: 100%;
-        padding: 8px 0;
       }
 
       .empty-text {
-        color: var(--color-brown-text);
-        font-size: 18px;
+        color: var(--color-text-brown);
+        font-size: var(--text-lg);
         text-align: center;
-        padding: 80px 0;
+        padding: var(--spacing-3xl) 0;
         opacity: 0.5;
       }
 
       .text-segment {
         transition: all 0.3s ease;
         color: var(--color-text-dark);
-        font-weight: 500;
       }
 
       .text-segment.highlighted {
         color: var(--color-gold);
-        font-weight: 700;
         text-shadow: 0 0 12px var(--color-gold-glow);
         animation: textGlow 1.5s ease-in-out infinite;
-        display: inline-block;
       }
 
       .modules-floating {
         position: absolute;
-        bottom: 24px;
-        right: 24px;
+        bottom: var(--spacing-lg);
+        right: var(--spacing-lg);
         z-index: 10;
         animation: floatIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         width: auto;
-        max-width: 300px;
+        max-width: 400px;
         transform-origin: bottom right;
         pointer-events: none;
       }
@@ -486,7 +458,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       .modules-list {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: var(--spacing-md);
         align-items: flex-end;
       }
 
@@ -494,11 +466,10 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         pointer-events: auto;
         display: flex;
         align-items: flex-start;
-        gap: 12px;
-        padding: 14px;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md);
         background: rgba(255, 255, 255, 0.92);
         backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border-radius: 16px;
         box-shadow: 
           0 4px 20px -4px rgba(0, 0, 0, 0.1),
@@ -528,7 +499,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .module-icon-wrapper {
-        font-size: 22px;
+        font-size: var(--text-xl);
         width: 36px;
         height: 36px;
         background: color-mix(in srgb, var(--module-color) 12%, transparent);
@@ -542,34 +513,29 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       .module-info {
         display: flex;
         flex-direction: column;
-        gap: 3px;
+        gap: var(--spacing-xs);
         flex: 1;
-        padding-top: 1px;
       }
 
       .module-name {
-        font-size: 14px;
-        font-weight: 800;
+        font-size: var(--text-sm);
         color: var(--color-text-dark);
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: var(--spacing-xs);
       }
 
       .module-action {
-        font-size: 13px;
+        font-size: var(--text-sm);
         color: var(--color-text-dark);
         opacity: 0.8;
-        font-weight: 500;
       }
 
       .progress-track {
         position: relative;
-        width: 240px;
-        max-width: 100%;
+        width: 100%;
         height: 8px;
         background: var(--color-night-light);
-        border-radius: var(--radius-full);
         overflow: hidden;
       }
 
@@ -579,7 +545,7 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         left: 0;
         height: 100%;
         background: var(--gradient-primary);
-        border-radius: var(--radius-full);
+        border-radius: 0 var(--radius-full) var(--radius-full) 0;
         transition: width var(--transition-smooth);
       }
 
@@ -654,12 +620,11 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       }
 
       .btn-nav {
-        height: 52px;
-        padding: 0 20px;
+        padding: var(--spacing-sm);
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: var(--spacing-xs);
         background: var(--color-starlight-cream);
         border: 2px solid var(--color-border-light);
         border-radius: 26px;
@@ -667,20 +632,20 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
         cursor: pointer;
         transition: all var(--transition-smooth);
         position: absolute;
-        white-space: nowrap;
       }
 
       .btn-prev {
-        left: 24px;
+        left: var(--spacing-lg);
+        padding-right: var(--spacing-md);
       }
 
       .btn-next {
-        right: 24px;
+        right: var(--spacing-lg);
+        padding-left: var(--spacing-md);
       }
 
       .btn-text {
-        font-size: 14px;
-        font-weight: 600;
+        font-size: var(--text-md);
         color: var(--color-text-dark);
       }
 
@@ -698,10 +663,6 @@ export default function StoryPlayer({ paragraphs, onNext, buttonText = "下一�
       .btn-nav.disabled {
         opacity: 0.3;
         cursor: not-allowed;
-      }
-
-      .btn-icon {
-        flex-shrink: 0;
       }
 
       /* Animations */

@@ -70,7 +70,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
                   aria-pressed={isSelected}
                 >
                   {isSelected && <span className="option-checkmark">✓</span>}
-                  <div className="option-shimmer" />
                   <span className="option-text">{opt}</span>
                 </button>
               );
@@ -81,7 +80,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             <div className="textarea-wrapper">
               <textarea
                 className="answer-textarea"
-                placeholder="在此輸入您的回答..."
                 value={answer}
                 onChange={e => setAnswer(e.target.value)}
                 required
@@ -109,13 +107,13 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             padding: var(--spacing-md);
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-2xl);
+            gap: var(--spacing-xl);
           }
 
           /* Step Indicators */
           .step-indicators {
             display: flex;
-            gap: var(--spacing-sm);
+            gap: var(--spacing-md);
             justify-content: center;
             flex-wrap: wrap;
             animation-delay: 0.1s;
@@ -128,10 +126,10 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             display: flex;
             align-items: center;
             justify-content: center;
-            fontSize: 18px;
-            font-weight: 700;
             transition: all var(--transition-smooth);
             position: relative;
+            font-weight: 700;
+            text-shadow: var(--shadow-md);
           }
 
           .step-indicator.completed,
@@ -145,6 +143,9 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             background: var(--gradient-tertiary);
             color: var(--color-text-muted);
             box-shadow: var(--shadow-sm);
+            border: 2px solid var(--color-border-light);
+            transform: scale(1);
+            cursor: default;
           }
 
           .step-indicator.current {
@@ -159,15 +160,9 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             cursor: pointer;
           }
 
-          .step-indicator.pending {
-            border: 2px solid var(--color-border-light);
-            transform: scale(1);
-            cursor: default;
-          }
-
           .checkmark {
             position: absolute;
-            font-size: 24px;
+            font-size: var(--text-lg);
             color: #fff;
           }
 
@@ -192,7 +187,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           }
 
           .question-box {
-            padding: var(--spacing-2xl);
+            padding: var(--spacing-2xl) var(--spacing-3xl);
             background: var(--gradient-tertiary);
             border-radius: var(--radius-lg);
             max-width: 820px;
@@ -216,18 +211,16 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           }
 
           .question-text {
-            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-size: var(--text-2xl);
             margin: 0;
-            font-weight: 500;
             color: var(--color-text-primary);
             position: relative;
             z-index: 1;
           }
 
           .quote {
-            font-size: 28px;
+            font-size: var(--text-2xl);
             color: var(--color-gold-light);
-            font-weight: 700;
           }
 
           /* Options Grid */
@@ -235,7 +228,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             padding: 0 var(--spacing-lg);
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-md);
+            gap: var(--spacing-xl);
             max-width: 900px;
             margin: 0 auto;
             width: 100%;
@@ -243,8 +236,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
 
           .option-button {
             padding: var(--spacing-lg);
-            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-            font-weight: 600;
+            font-size: var(--text-xl);
             border-radius: var(--radius-lg);
             background: var(--color-starlight-cream);
             color: var(--color-text-dark);
@@ -285,30 +277,11 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
 
           .option-checkmark {
             position: absolute;
-            bottom: 5px;
-            right: 15px;
-            font-size: 30px;
+            bottom: var(--spacing-xs);
+            right: var(--spacing-md);
+            font-size: var(--text-3xl);
             color: var(--color-gold-light);
             animation: checkmark-appear 0.3s ease-out;
-          }
-
-          .option-shimmer {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-          }
-
-          .option-button:hover:not(.selected) .option-shimmer {
-            opacity: 1;
-            animation: shimmer 2s ease-in-out infinite;
-          }
-
-          .option-button.selected .option-shimmer {
-            opacity: 1;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            animation: shimmer 3s ease-in-out infinite;
           }
 
           .option-text {
@@ -335,7 +308,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             padding: var(--spacing-lg);
             width: 100%;
             resize: none;
-            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            font-size: var(--text-base);
             border-radius: var(--radius-lg);
             min-height: 200px;
             border: 2px solid var(--color-border-light);
@@ -372,16 +345,14 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           }
 
           .submit-button {
-            padding: 20px 56px;
+            padding: var(--spacing-md) var(--spacing-lg);
             width: 100%;
             max-width: 420px;
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            font-weight: 700;
+            font-size: var(--text-xl);
             border-radius: var(--radius-xl);
             transition: all var(--transition-smooth);
             position: relative;
             overflow: hidden;
-            letter-spacing: normal;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -417,7 +388,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           }
 
           .submit-icon {
-            font-size: 48px;
+            font-size: var(--text-5xl);
             transition: transform 0.3s ease;
           }
 

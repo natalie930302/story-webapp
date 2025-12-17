@@ -8,7 +8,7 @@ export default function EndPage() {
     <>
       <div className="end-container">
         <div className="check-circle">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <svg width="90" height="90" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </div>
 
         <h1 className="end-title">圓滿謝幕</h1>
@@ -26,45 +26,41 @@ export default function EndPage() {
           justify-content: center;
           align-items: center;
           height: 100%;
-          padding: 64px 0;
+          padding: var(--spacing-3xl) 0;
         }
         
         .check-circle {
-          width: 120px;
-          height: 120px;
+          width: 100px;
+          height: 100px;
           border-radius: 50%;
           background: var(--gradient-primary);
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 32px;
+          margin-bottom: var(--spacing-lg);
           box-shadow: 0 20px 48px var(--color-gold-glow), 0 8px 24px rgba(0, 0, 0, 0.15);
           animation: glowPulse 2s ease-in-out infinite;
         }
 
         .end-title {
-          font-size: max(2rem,min(4vw,2.5rem));
-          font-weight: 900;
-          margin-bottom: 24px;
+          font-size: var(--text-5xl);
+          margin-bottom: var(--spacing-lg);
           background: var(--gradient-primary);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          letter-spacing: -0.025em;
         }
 
         .end-message {
-          font-size: clamp(1rem, 2vw, 1.25rem);
+          font-size: var(--text-2xl);
           color: var(--color-text-secondary);
           opacity: 0.8;
-          margin-bottom: 40px;
-          max-width: 600px;
+          margin-bottom: var(--spacing-2xl);
         }
 
         .home-button {
-          padding: 18px var(--spacing-2xl);
+          padding: var(--spacing-md) var(--spacing-xl);
           font-size: var(--text-xl);
-          font-weight: 700;
           color: var(--color-text-primary);
           background: var(--gradient-secondary);
           border: none;

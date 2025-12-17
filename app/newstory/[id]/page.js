@@ -27,7 +27,7 @@ export default function NewStoryPage() {
     }
   }, [])
 
-  if (!story) return <LoadingPage message="您的故事正在根據您的選擇進行編寫與塑造" />
+  if (!story) return <LoadingPage message="正在改編新故事" />
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function NewStoryPage() {
       {/* Story player section */}
       <div className="story-player-section appear">
         <StoryPlayer 
-          paragraphs={story.segments} 
+          segments={story.segments} 
           onNext={() => router.push('/end')} 
           buttonText="故事結局"
         />
@@ -56,17 +56,15 @@ export default function NewStoryPage() {
         }
 
         .page-title {
-          font-weight: bold;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: var(--spacing-md);
           color: var(--color-text-primary);
-          font-size: max(2rem,min(4vw,2.5rem));
+          font-size: var(--text-5xl);
         }
 
         .title-icon {
-          font-size: clamp(2rem, 4vw, 2.5rem);
           animation: float 3s ease-in-out infinite;
         }
       `}</style>

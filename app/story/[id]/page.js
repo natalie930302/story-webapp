@@ -23,7 +23,7 @@ export default function StoryPage() {
   }, [id]);
 
   if (isLoading)
-    return <LoadingPage message="正在準備您的故事..." />;
+    return <LoadingPage message="正在準備故事" />;
 
   if (!story)
     return (
@@ -44,7 +44,7 @@ export default function StoryPage() {
             justify-content: center;
             align-items: center;
             height: 100%;
-            padding: 64px 0;
+            padding: var(--spacing-3xl) 0;
           }
 
           .error-content {
@@ -52,25 +52,23 @@ export default function StoryPage() {
           }
 
           .error-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
+          font-size: var(--text-5xl);
+            margin-bottom: var(--spacing-md);
           }
 
           .error-title {
-            font-size: max(1.25rem,min(2.5vw,1.75rem));
-            font-weight: 600;
+            font-size: var(--text-2xl);
             color: var(--color-starlight-cream);
-            margin-bottom: 16px;
+            margin-bottom: var(--spacing-md);
           }
 
           .button-container {
-            margin-top: 16px;
+            margin-top: var(--spacing-md);
           }
 
           .home-button {
-            padding: var(--spacing-sm) 28px;
+            padding: var(--spacing-md) var(--spacing-lg);
             font-size: var(--text-lg);
-            font-weight: 600;
             color: #fff5eb;
             background: linear-gradient(135deg, #e55b3c 0%, #d87885 100%);
             border: none;
@@ -100,9 +98,9 @@ export default function StoryPage() {
       {/* Story player section */}
       <div className="story-player-section appear">
         <StoryPlayer 
-          paragraphs={story.segments} 
+          segments={story.segments} 
           onNext={() => router.push(`/questions/${id}`)} 
-          buttonText="開始互動問卷"
+          buttonText="開始互動問題"
         />
       </div>
 
@@ -112,13 +110,12 @@ export default function StoryPage() {
         }
 
         .page-title {
-          font-weight: bold;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: var(--spacing-md);
           color: var(--color-text-primary);
-          font-size: max(2rem,min(4vw,2.5rem));
+          font-size: var(--text-5xl);
         }
       `}</style>
     </>

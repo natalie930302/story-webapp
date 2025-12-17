@@ -14,7 +14,7 @@ export default function Sidebar() {
   const isActive = (href) => pathname === href;
 
   return (
-    <aside className="sidebar" aria-label="主要導覽">
+    <aside className="sidebar">
       <div className="bg-pattern" />
       <div className="sidebar-content">
         <nav className="nav-container">
@@ -41,11 +41,11 @@ export default function Sidebar() {
         .sidebar {
           width: 110px;
           background: var(--gradient-sidebar);
-          padding: 20px var(--spacing-md);
+          padding: var(--spacing-lg) var(--spacing-md);
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 18px;
+          gap: var(--spacing-lg);
           color: var(--color-text-primary);
           position: relative;
           border-right: 1px solid var(--color-border-light);
@@ -66,7 +66,7 @@ export default function Sidebar() {
           gap: var(--spacing-md);
           width: 100%;
           position: relative;
-          z-index: 1;
+          z-index: 2;
         }
 
         .nav-container {
@@ -88,7 +88,7 @@ export default function Sidebar() {
           background: var(--gradient-card);
           border: 2px solid var(--color-border-turquoise);
           box-shadow: var(--shadow-lg), var(--shadow-glow);
-          font-size: 28px;
+          font-size: var(--text-3xl);
           color: var(--color-text-primary);
           text-decoration: none;
           cursor: pointer;
@@ -111,7 +111,7 @@ export default function Sidebar() {
 
         .glow-effect {
           position: absolute;
-          bottom: -12px;
+          bottom: calc(-1 * var(--spacing-md));
           left: 50%;
           transform: translateY(-50%);
           width: 80%;
@@ -129,14 +129,13 @@ export default function Sidebar() {
 
         .tooltip {
           position: absolute;
-          left: 100%;
+          left: 95%;
           margin-left: var(--spacing-md);
           background: linear-gradient(135deg, var(--color-night-medium) 0%, var(--color-night-light) 100%);
           color: var(--color-text-primary);
-          padding: var(--spacing-xs) 14px;
+          padding: var(--spacing-xs) var(--spacing-md);
           border-radius: var(--radius-sm);
           white-space: nowrap;
-          font-weight: 600;
           font-size: var(--text-sm);
           box-shadow: var(--shadow-md);
           border: 1px solid var(--color-border-primary);
