@@ -750,9 +750,21 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         padding-right: var(--spacing-md);
       }
 
+      @media (max-width: 480px) {
+        .btn-prev {
+          padding-right: var(--spacing-sm);
+        }
+      }
+
       .btn-next {
         right: var(--spacing-lg);
         padding-left: var(--spacing-md);
+      }
+
+      @media (max-width: 480px) {
+        .btn-next {
+          padding-left: var(--spacing-sm);
+        }
       }
 
       .btn-text {
