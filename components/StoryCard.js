@@ -24,8 +24,6 @@ export default function StoryCard({ story = {}, onClick }) {
   return (
     <div 
       className="card-wrapper"
-      role="button"
-      tabIndex={0}
       onClick={handleActivate}
     >
       <div className="book-container">

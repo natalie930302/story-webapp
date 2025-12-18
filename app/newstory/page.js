@@ -1,33 +1,30 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import StoryPlayer from '../../../components/StoryPlayer'
-import LoadingPage from '../../../components/LoadingPage'
+'use client';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import StoryPlayer from '../../components/StoryPlayer';
+import LoadingPage from '../../components/LoadingPage';
+import ErrorPage from '../../components/ErrorPage';
 
 export default function NewStoryPage() {
-  const router = useRouter()
-  const [story, setStory] = useState(null)
+  const router = useRouter();
+  const [story, setStory] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const start = Date.now();
-    const stored = localStorage.getItem('newStory')
-    if (stored) {
-      try {
-        const data = JSON.parse(stored)
-        const elapsed = Date.now() - start
-        const wait = Math.max(0, 2000 - elapsed)
-        if (wait > 0) {
-          setTimeout(() => setStory(data), wait)
-        } else {
-          setStory(data)
-        }
-      } catch (err) {
-        console.error('parse error', err)
-      }
+    setIsLoading(true);
+    try {
+      const data = JSON.parse(localStorage.getItem('newStory'));
+      if (data && data.segments) setStory(data);
+    } catch (error) {
+      console.log('Failed to load new story from localStorage', error);
+    } finally {
+      setIsLoading(false);
     }
   }, [])
 
-  if (!story) return <LoadingPage message="正在改編新故事" />
+  if (isLoading) return <LoadingPage message="正在改編新故事" />;
+
+  if (!story) return <ErrorPage title = '無法載入故事' buttonText = '返回首頁' onButtonClick={() => router.push('/')} />;
 
   return (
     <>

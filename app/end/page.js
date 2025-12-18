@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 export default function EndPage() {
   const router = useRouter();
+  
   return (
     <>
       <div className="end-container">
@@ -19,6 +20,7 @@ export default function EndPage() {
           返回書架
         </button>
       </div>
+      
       <style jsx>{`
         .end-container {
           display: flex;
