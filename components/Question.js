@@ -1,14 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 
-export default function Question({ question, onAnswer, isLastQuestion, currentIndex, totalQuestions }) {
+export default function Question({ question, onAnswer, currentIndex, totalQuestions }) {
   const [answer, setAnswer] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleSubmit = (e) => {
-    if(e) e.preventDefault();
-    if(answer) onAnswer(answer);
-  };
 
   return (
     <>
@@ -20,7 +15,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
               const isCompleted = idx < currentIndex;
               const isCurrent = idx === currentIndex;
               const isPending = idx > currentIndex;
-              
               return (
                 <div
                   key={idx}
@@ -53,7 +47,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
         </div>
 
         {/* Options display */}
-        {question.options && question.options.length > 0 ? (
+        {question.options?.length > 0 && (
           <div className="options-grid">
             {question.options.map((opt, i) => {
               const isSelected = selectedOption === i;
@@ -75,30 +69,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
               );
             })}
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="answer-form">
-            <div className="textarea-wrapper">
-              <textarea
-                className="answer-textarea"
-                value={answer}
-                onChange={e => setAnswer(e.target.value)}
-                required
-                rows="5"
-              />
-            </div>
-
-            {/* Submit button */}
-            <div className="submit-wrapper">
-              <button 
-                type="submit"
-                disabled={!answer.trim()}
-                className={`submit-button ${answer.trim() ? 'enabled' : 'disabled'}`}
-              >
-                <span className="submit-icon">{isLastQuestion ? '🎉' : '▶️'}</span>
-                <span>{isLastQuestion ? '完成回答' : '繼續下一題'}</span>
-              </button>
-            </div>
-          </form>
         )}
         
         <style jsx>{`
@@ -163,7 +133,7 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           .checkmark {
             position: absolute;
             font-size: var(--text-lg);
-            color: #fff;
+            color: var(--color-text-secondary);
           }
 
           .pulse-ring {
@@ -206,13 +176,12 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+            background: linear-gradient(90deg, #ffffff00 0%, #ffffff12 50%, #ffffff00 100%)
             animation: shimmer-slide 3s ease-in-out infinite;
           }
 
           .question-text {
             font-size: var(--text-2xl);
-            margin: 0;
             color: var(--color-text-primary);
             position: relative;
             z-index: 1;
@@ -287,113 +256,6 @@ export default function Question({ question, onAnswer, isLastQuestion, currentIn
           .option-text {
             position: relative;
             z-index: 1;
-          }
-
-          /* Form */
-          .answer-form {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-xl);
-          }
-
-          .textarea-wrapper {
-            padding: 0 var(--spacing-lg);
-            position: relative;
-            max-width: 820px;
-            margin: 0 auto;
-            width: 100%;
-          }
-
-          .answer-textarea {
-            padding: var(--spacing-lg);
-            width: 100%;
-            resize: none;
-            font-size: var(--text-base);
-            border-radius: var(--radius-lg);
-            min-height: 200px;
-            border: 2px solid var(--color-border-light);
-            background: linear-gradient(135deg, var(--color-starlight-cream) 0%, var(--color-starlight-medium) 100%);
-            backdrop-filter: blur(12px);
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-smooth);
-            color: var(--color-text-dark);
-            outline: none;
-            transform: scale(1);
-          }
-
-          .answer-textarea:focus {
-            border: 2px solid var(--color-gold);
-            box-shadow: 0 0 0 3px var(--color-gold-glow), var(--shadow-lg);
-            transform: scale(1.015);
-          }
-
-          .answer-textarea::placeholder {
-            color: var(--color-brown-cream);
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-          }
-
-          .answer-textarea:focus::placeholder {
-            opacity: 0.4;
-          }
-
-          /* Submit Button */
-          .submit-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 0 var(--spacing-lg);
-          }
-
-          .submit-button {
-            padding: var(--spacing-md) var(--spacing-lg);
-            width: 100%;
-            max-width: 420px;
-            font-size: var(--text-xl);
-            border-radius: var(--radius-xl);
-            transition: all var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-xs);
-            outline: none;
-          }
-
-          .submit-button.enabled {
-            background: var(--gradient-secondary);
-            color: var(--color-text-primary);
-            border: 2px solid var(--color-gold);
-            box-shadow: var(--shadow-2xl), var(--shadow-glow);
-            cursor: pointer;
-          }
-
-          .submit-button.enabled:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: var(--shadow-2xl), var(--shadow-glow-strong), 0 0 0 6px var(--color-gold-glow);
-          }
-
-          .submit-button.enabled:active {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: var(--shadow-xl), var(--shadow-glow);
-          }
-
-          .submit-button.disabled {
-            background: var(--gradient-tertiary);
-            color: var(--color-text-muted);
-            border: 2px solid var(--color-border-lighter);
-            box-shadow: var(--shadow-sm);
-            cursor: not-allowed;
-            opacity: 0.65;
-          }
-
-          .submit-icon {
-            font-size: var(--text-5xl);
-            transition: transform 0.3s ease;
-          }
-
-          .submit-button.enabled:hover .submit-icon {
-            transform: scale(1.15) rotate(5deg);
           }
 
           /* Animations */

@@ -69,18 +69,18 @@ export default function StoryPage() {
           .home-button {
             padding: var(--spacing-md) var(--spacing-lg);
             font-size: var(--text-lg);
-            color: #fff5eb;
-            background: linear-gradient(135deg, #e55b3c 0%, #d87885 100%);
+            color: var(--color-white);
+            background: var(--gradient-secondary);
             border: none;
-            border-radius: 12px;
+          border-radius: var(--radius-sm);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-smooth);
+            box-shadow: var(--shadow-md);
           }
 
           .home-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2), 0 6px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-lg);
           }
         `}</style>
       </div>

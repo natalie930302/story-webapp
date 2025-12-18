@@ -100,7 +100,7 @@ export default function Sidebar() {
         .nav-item.active {
           background: var(--gradient-primary);
           border: 2px solid var(--color-gold);
-          box-shadow: 0 12px 32px var(--color-gold-glow), 0 0 40px var(--color-gold-glow);
+          box-shadow: var(--shadow-lg), var(--shadow-glow-strong);
           color: var(--color-bg-dark);
         }
 
@@ -119,7 +119,7 @@ export default function Sidebar() {
           background: radial-gradient(ellipse 100% 100% at 50% 0%, var(--color-gold-glow) 0%, transparent 70%);
           filter: blur(8px);
           opacity: 0;
-          transition: opacity 0.4s ease-out;
+          transition: var(--transition-base);
         }
 
         .nav-item:hover .glow-effect {
@@ -131,7 +131,7 @@ export default function Sidebar() {
           position: absolute;
           left: 95%;
           margin-left: var(--spacing-md);
-          background: linear-gradient(135deg, var(--color-night-medium) 0%, var(--color-night-light) 100%);
+          background: var(--gradient-tertiary);
           color: var(--color-text-primary);
           padding: var(--spacing-xs) var(--spacing-md);
           border-radius: var(--radius-sm);

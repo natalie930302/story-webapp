@@ -109,7 +109,7 @@ export default function IndexPage() {
           align-items: center;
           justify-content: center;
           gap: var(--spacing-md);
-          background: linear-gradient(135deg, var(--color-night-light) 0%, var(--color-night-medium) 100%);
+          background: var(--gradient-tertiary);
           border-radius: var(--radius-lg);
           border: 2px solid var(--color-border-light);
           padding: var(--spacing-2xl) var(--spacing-xl);
@@ -134,10 +134,10 @@ export default function IndexPage() {
         .sparkle-overlay {
           position: absolute;
           inset: 0;
-          border-radius: 24px;
+          border-radius: var(--radius-lg);
           background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2), transparent 70%);
           opacity: 0;
-          transition: opacity 0.4s ease;
+          transition: opacity var(--transition-base);
           pointer-events: none;
         }
 
@@ -148,10 +148,10 @@ export default function IndexPage() {
         .particle-background {
           position: absolute;
           inset: 0;
-          border-radius: 24px;
+          border-radius: var(--radius-lg);
           overflow: hidden;
           opacity: 0;
-          transition: opacity 0.5s ease;
+          transition: opacity var(--transition-slow);
           pointer-events: none;
         }
 
@@ -189,7 +189,7 @@ export default function IndexPage() {
           color: var(--color-gold);
           position: relative;
           z-index: 10;
-          transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: transform var(--transition-smooth);
           animation: float 3s ease-in-out infinite;
         }
 
@@ -208,7 +208,7 @@ export default function IndexPage() {
           z-index: 10;
           text-align: center;
           color: var(--color-starlight-cream);
-          transition: color 0.3s ease;
+          transition: color var(--transition-base);
         }
 
         .create-story-card:hover .card-title {
@@ -424,7 +424,7 @@ export default function IndexPage() {
           padding: var(--spacing-sm) var(--spacing-md);
           font-size: var(--text-base);
           color: var(--color-text-dark);
-          background-color: rgba(245, 242, 234, 0.6);
+          background-color: var(--color-starlight-cream);
           border: 2px solid var(--color-border-primary);
           border-radius: var(--radius-sm);
           outline: none;
@@ -440,7 +440,7 @@ export default function IndexPage() {
         .form-textarea:focus {
           border-color: var(--color-gold);
           background-color: var(--color-starlight-cream);
-          box-shadow: 0 0 0 3px var(--color-gold-glow), 0 8px 24px rgb(0 0 0 / 0.12);
+          box-shadow: var(--shadow-lg), var(--shadow-glow-strong);
         }
 
         .form-textarea {
@@ -468,7 +468,7 @@ export default function IndexPage() {
 
         .submit-button:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: var(--shadow-xl), 0 0 24px rgba(157, 121, 242, 0.4), 0 0 16px rgba(242, 147, 176, 0.3);
+          box-shadow: var(--shadow-xl);
         }
 
         .submit-button:active:not(:disabled) {
@@ -476,7 +476,7 @@ export default function IndexPage() {
         }
 
         .submit-button.uploading {
-          background: linear-gradient(135deg, rgba(157, 121, 242, 0.5) 0%, rgba(242, 147, 176, 0.5) 100%);
+          background: var(--gradient-tertiary);
           cursor: not-allowed;
           opacity: 0.7;
         }

@@ -122,13 +122,13 @@ export default function QuestionsPage() {
         .back-button {
           padding: var(--spacing-sm) var(--spacing-lg);
           font-size: var(--text-lg);
-          color: #fff;
-          background: linear-gradient(135deg, #e55b3c 0%, #d87885 100%);
+          color: var(--color-white);
+          background: var(--gradient-secondary);
           border: none;
-          border-radius: 12px;
+          border-radius: var(--radius-sm);
           cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          transition: all var(--transition-base);
+          box-shadow: var(--shadow-lg);
           margin-top: var(--spacing-md);
         }
 

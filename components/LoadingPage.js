@@ -86,7 +86,7 @@ export default function LoadingPage({ message = "Loading" }) {
         
         .loading-message {
           color: var(--color-starlight-cream);
-          text-shadow: 0 0 20px var(--color-gold-glow);
+          text-shadow: var(--shadow-glow-strong);
           text-align: center;
           margin-bottom: var(--spacing-lg);
           font-size: var(--text-2xl);
@@ -103,9 +103,9 @@ export default function LoadingPage({ message = "Loading" }) {
         .dot {
           width: 12px;
           height: 12px;
-          background: linear-gradient(135deg, var(--color-neon-purple), var(--color-neon-pink));
+          background: var(--gradient-secondary);
           border-radius: 50%;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 14px rgba(242, 147, 176, 0.6);
+          box-shadow: var(--shadow-glow);
           animation: dot-pulse 1.8s ease-in-out infinite;
         }
 

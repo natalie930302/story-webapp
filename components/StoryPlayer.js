@@ -176,43 +176,41 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         <div className="quote-mark quote-right">"</div>
         
         {currentModuleHints && currentModuleHints.length > 0 && (
-          <div className="modules-floating">
-            <div className="modules-list">
-              {currentModuleHints.map((hintItem, idx) => {
-                let moduleKey = "";
-                let actionText = "";
+          <div className="modules-list">
+            {currentModuleHints.map((hintItem, idx) => {
+              let moduleKey = "";
+              let actionText = "";
 
-                if (typeof hintItem === 'string') {
-                    moduleKey = hintItem;
-                } else if (typeof hintItem === 'object' && hintItem !== null) {
-                    moduleKey = hintItem.module;
-                    actionText = hintItem.action;
-                }
+              if (typeof hintItem === 'string') {
+                  moduleKey = hintItem;
+              } else if (typeof hintItem === 'object' && hintItem !== null) {
+                  moduleKey = hintItem.module;
+                  actionText = hintItem.action;
+              }
 
-                const config = moduleConfig[moduleKey];
-                if (!config) return null;
-                return (
-                  <div 
-                    key={`${moduleKey}-${idx}`}
-                    className="module-card"
-                    style={{ 
-                      '--module-color': config.color,
-                      '--border-color': config.color
-                    }}
-                  >
-                    <div className="module-icon-wrapper">
-                        <span className="module-emoji">{config.icon}</span>
-                    </div>
-                    <div className="module-info">
-                        <span className="module-name">{config.name}</span>
-                        {actionText && (
-                            <span className="module-action">{actionText}</span>
-                        )}
-                    </div>
+              const config = moduleConfig[moduleKey];
+              if (!config) return null;
+              return (
+                <div 
+                  key={`${moduleKey}-${idx}`}
+                  className="module-card"
+                  style={{ 
+                    '--module-color': config.color,
+                    '--border-color': config.color
+                  }}
+                >
+                  <div className="module-icon-wrapper">
+                      <span className="module-emoji">{config.icon}</span>
                   </div>
-                );
-              })}
-            </div>
+                  <div className="module-info">
+                      <span className="module-name">{config.name}</span>
+                      {actionText && (
+                          <span className="module-action">{actionText}</span>
+                      )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
         
@@ -342,7 +340,6 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
       .header-title {
         font-size: var(--text-2xl);
         color: var(--color-starlight-cream);
-        margin: 0;
       }
       
       .progress-info {
@@ -365,7 +362,7 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         display: flex;
         overflow: hidden;
         box-shadow: var(--shadow-md);
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all var(--transition-base);
       }
 
       .notebook-lines {
@@ -433,31 +430,28 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
       }
 
       .text-segment {
-        transition: all 0.3s ease;
+        transition: all var(--transition-base);
         color: var(--color-text-dark);
       }
 
       .text-segment.highlighted {
         color: var(--color-gold);
-        text-shadow: 0 0 12px var(--color-gold-glow);
+        text-shadow: var(--shadow-glow);
         animation: textGlow 1.5s ease-in-out infinite;
       }
 
-      .modules-floating {
+      .modules-list {
         position: absolute;
         bottom: var(--spacing-lg);
         right: var(--spacing-lg);
         z-index: 10;
         animation: floatIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         width: auto;
-        max-width: 400px;
+        max-width: 70%;
         transform-origin: bottom right;
         pointer-events: none;
-      }
-
-      .modules-list {
         display: flex;
-        flex-direction: column;
+        // flex-direction: column;
         gap: var(--spacing-md);
         align-items: flex-end;
       }
@@ -468,13 +462,11 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         align-items: flex-start;
         gap: var(--spacing-sm);
         padding: var(--spacing-md);
-        background: rgba(255, 255, 255, 0.92);
+        background: var(--color-starlight-cream);
         backdrop-filter: blur(12px);
-        border-radius: 16px;
-        box-shadow: 
-          0 4px 20px -4px rgba(0, 0, 0, 0.1),
-          0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        transition: all var(--transition-base);
         position: relative;
         overflow: hidden;
         width: fit-content;
@@ -494,8 +486,8 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
 
       .module-card:hover {
         transform: translateY(-4px) scale(1.02);
-        box-shadow: 0 12px 32px -8px rgba(0,0,0,0.15);
-        background: #fff;
+        box-shadow: var(--shadow-md);
+        background: var(--color-starlight-cream);
       }
 
       .module-icon-wrapper {
@@ -503,7 +495,7 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         width: 36px;
         height: 36px;
         background: color-mix(in srgb, var(--module-color) 12%, transparent);
-        border-radius: 10px;
+        border-radius: var(--radius-sm);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -627,7 +619,7 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         gap: var(--spacing-xs);
         background: var(--color-starlight-cream);
         border: 2px solid var(--color-border-light);
-        border-radius: 26px;
+        border-radius: var(--radius-xl);
         color: var(--color-text-dark);
         cursor: pointer;
         transition: all var(--transition-smooth);
@@ -695,10 +687,10 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
 
       @keyframes textGlow {
         0%, 100% {
-          text-shadow: 0 0 12px var(--color-gold-glow);
+          text-shadow: var(--shadow-glow);
         }
         50% {
-          text-shadow: 0 0 20px var(--color-gold-glow), 0 0 30px var(--color-gold-glow);
+          text-shadow: var(--shadow-glow-strong);
         }
       }
 

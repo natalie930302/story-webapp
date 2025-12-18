@@ -91,10 +91,7 @@ export default function Modal({ isVisible, onClose, children }) {
           -webkit-backdrop-filter: blur(0px);
           cursor: pointer;
           opacity: 0;
-          transition: 
-            opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
-            backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1),
-            -webkit-backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1);
+          transition: opacity var(--transition-base), backdrop-filter var(--transition-base), -webkit-backdrop-filter var(--transition-base);
           pointer-events: auto;
         }
 
@@ -108,11 +105,7 @@ export default function Modal({ isVisible, onClose, children }) {
           max-width: 640px;
           width: 100%;
           pointer-events: auto;
-          background: linear-gradient(
-            145deg,
-            var(--color-night-light) 0%,
-            var(--color-night-medium) 100%
-          );
+          background: var(--gradient-tertiary);
           border-radius: var(--radius-lg);
           box-shadow: 
             var(--shadow-2xl),
@@ -122,10 +115,7 @@ export default function Modal({ isVisible, onClose, children }) {
           max-height: 90vh;
           position: relative;
           z-index: 10000;
-          transition: 
-            opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
-            transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
-            filter 300ms cubic-bezier(0.4, 0, 0.2, 1);
+          transition: opacity var(--transition-base), transform var(--transition-base), filter var(--transition-base);
           opacity: 0;
           transform: scale(0.9) translateY(30px);
           filter: blur(8px);

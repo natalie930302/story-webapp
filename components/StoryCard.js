@@ -127,7 +127,7 @@ export default function StoryCard({ story = {}, onClick }) {
         .book-container {
           width: 100%;
           aspect-ratio: 3/4;
-          border-radius: 13%;
+          border-radius: 14%;
           transform-origin: center left;
           transform-style: preserve-3d;
           transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
@@ -150,9 +150,9 @@ export default function StoryCard({ story = {}, onClick }) {
           width: 100%;
           height: 100%;
           position: relative;
-          top: -1%;
+          top: -1px;
           left: 3%;
-          border-radius: 12% 12% 12% 7%;
+          border-radius: 12% 12% 12% 8%;
           overflow: hidden;
           transform-origin: left center;
           transition: transform var(--transition-slow);
@@ -196,11 +196,10 @@ export default function StoryCard({ story = {}, onClick }) {
           z-index: 8;
           position: relative;
           text-shadow: var(--shadow-md);
-          margin: 0;
         }
 
         .ribbon {
-          width: 20%;
+          width: 18%;
           position: absolute;
           right: 12%;
           top: -2%;
@@ -233,13 +232,12 @@ export default function StoryCard({ story = {}, onClick }) {
 
         .book-spine {
           position: absolute;
+          top: -1px;
           left: 5%;
-          top: -1%;
-          bottom: 4%;
-          width: calc(100% - 8px);
-          border-radius: 10%;
+          width: 97%;
+          height: 97%;
+          border-radius: 15%;
           background: var(--color-starlight-cream);
-          box-shadow: inset -6px 0 12px rgba(0, 0, 0, 0.2);
           z-index: 1;
         }
 

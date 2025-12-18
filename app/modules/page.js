@@ -80,13 +80,13 @@ export default function ModulesPage() {
           background: var(--gradient-beige);
           border-radius: var(--radius-lg);
           border: 2px solid var(--color-border-primary);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.06);
+          box-shadow: var(--shadow-md);
           cursor: pointer;
         }
 
         .module-card:hover {
           transform: translateY(-8px);
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 24px var(--color-gold-glow);
+          box-shadow: var(--shadow-lg), var(--shadow-glow);
         }
 
         .module-header {

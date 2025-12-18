@@ -7,9 +7,9 @@
   /* 核心主題顏色：Celestials 夢幻夜空配色 (低飽和度的深色基底 + 高飽和的霓虹光) */
 
   /* 深色系 - 夜空與宇宙 (Deep Indigo / Cosmic Navy) */
-  --color-night-dark: #20243a; /* 極深的夜藍紫 - 主要背景 */
-  --color-night-medium: #30406c; /* 次要背景/Sidebar */
-  --color-night-light: #3f4f8a; /* 卡片基底色 */
+  --color-night-dark: #20243a;
+  --color-night-medium: #30406c;
+  --color-night-light: #3f4f8a;
 
   /* 霓虹強調色 1: 星光紫/粉 (Starlight Purple/Pink) */
   --color-neon-purple: #9d79f2;
@@ -90,8 +90,8 @@
   /* 動畫過渡效果 */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* 陰影和光暈 */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -113,7 +113,7 @@
     135deg,
     var(--color-neon-purple) 0%,
     var(--color-neon-pink) 100%
-  ); /* 紫粉霓虹 */
+  );
   --gradient-tertiary: linear-gradient(
     135deg,
     var(--color-night-medium) 0%,
