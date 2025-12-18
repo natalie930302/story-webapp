@@ -66,6 +66,18 @@
   --spacing-4xl: 80px;
   --spacing-5xl: 96px;
 
+  /* 響應式斷點 */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* 響應式間距 */
+  --spacing-mobile: clamp(1rem, 4vw, 2rem);
+  --spacing-tablet: clamp(1.5rem, 5vw, 3rem);
+  --spacing-desktop: clamp(2rem, 6vw, 6rem);
+
   /* 字體大小系統 */
   --text-sm: 0.875rem; /* 14px */
   --text-base: 1rem; /* 16px */
@@ -192,10 +204,28 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   background: transparent;
-  padding: 3rem 6rem;
+  padding: var(--spacing-desktop);
   margin: 0 auto;
   position: relative;
   z-index: 1;
+}
+
+/* 響應式佈局 */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    padding: var(--spacing-mobile);
+    height: calc(100vh - 80px); /* 預留sidebar空間 */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-content {
+    padding: var(--spacing-tablet);
+  }
 }
 
 /* 動畫定義 */
@@ -306,4 +336,61 @@ body {
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
   transform: translateY(20px);
   animation: appear 0.6s ease-out forwards;
+}
+
+/* 全域響應式樣式 */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px; /* 減少基礎字體大小 */
+  }
+
+  /* 確保觸控目標至少44px */
+  button,
+  .btn,
+  .nav-item,
+  .option-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
+  /* 在小屏幕上提供更多觸控空間 */
+  button,
+  .btn,
+  .nav-item,
+  .option-button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* 橫屏模式優化 */
+@media (max-height: 480px) and (orientation: landscape) {
+  .main-content {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .modal-panel {
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+}
+
+/* 打印樣式 */
+@media print {
+  .sidebar,
+  .modal-backdrop,
+  .controls-card {
+    display: none !important;
+  }
+
+  .main-content {
+    padding: 0;
+    box-shadow: none;
+  }
 }

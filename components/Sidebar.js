@@ -49,6 +49,34 @@ export default function Sidebar() {
           color: var(--color-text-primary);
           position: relative;
           border-right: 1px solid var(--color-border-light);
+          transition: all var(--transition-base);
+        }
+        
+        /* 移動端響應式設計 - 轉為底部導航 */
+        @media (max-width: 768px) {
+          .sidebar {
+            width: 100vw;
+            height: 80px;
+            flex-direction: row;
+            justify-content: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-right: none;
+            border-top: 1px solid var(--color-border-light);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+          }
+        }
+        
+        /* 平板端優化 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .sidebar {
+            width: 90px;
+            padding: var(--spacing-md);
+          }
         }
 
         .bg-pattern {
@@ -57,6 +85,13 @@ export default function Sidebar() {
           opacity: 0.12;
           background: radial-gradient(circle at 20% 50%, var(--color-neon-teal) 0%, transparent 50%),
                       radial-gradient(circle at 80% 80%, var(--color-neon-purple) 0%, transparent 50%);
+        }
+        
+        @media (max-width: 768px) {
+          .bg-pattern {
+            background: radial-gradient(circle at 20% 20%, var(--color-neon-teal) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, var(--color-neon-purple) 0%, transparent 50%);
+          }
         }
 
         .sidebar-content {
@@ -68,6 +103,14 @@ export default function Sidebar() {
           position: relative;
           z-index: 2;
         }
+        
+        @media (max-width: 768px) {
+          .sidebar-content {
+            flex-direction: row;
+            justify-content: center;
+            height: 100%;
+          }
+        }
 
         .nav-container {
           display: flex;
@@ -75,6 +118,14 @@ export default function Sidebar() {
           gap: var(--spacing-sm);
           align-items: center;
           margin-top: var(--spacing-sm);
+        }
+        
+        @media (max-width: 768px) {
+          .nav-container {
+            flex-direction: row;
+            margin-top: 0;
+            gap: var(--spacing-lg);
+          }
         }
 
         .nav-item {
@@ -95,6 +146,14 @@ export default function Sidebar() {
           transform: none;
           position: relative;
           text-shadow: var(--shadow-md);
+        }
+        
+        @media (max-width: 480px) {
+          .nav-item {
+            width: 56px;
+            height: 56px;
+            font-size: var(--text-2xl);
+          }
         }
 
         .nav-item.active {
@@ -142,6 +201,15 @@ export default function Sidebar() {
           z-index: 10;
           opacity: 0;
           transition: opacity var(--transition-fast);
+        }
+        
+        @media (max-width: 768px) {
+          .tooltip {
+            left: 50%;
+            top: -45px;
+            margin-left: 0;
+            transform: translateX(-50%);
+          }
         }
 
         .nav-item:hover .tooltip {

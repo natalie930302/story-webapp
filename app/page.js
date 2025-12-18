@@ -73,8 +73,7 @@ export default function IndexPage() {
       {/* Header section */}
       <div className="header-section appear">
         <h1 className="page-title appear">
-          <span className="title-icon">📚</span>
-          故事收藏櫃
+          📚 故事收藏櫃
         </h1>
       </div>
 
@@ -190,13 +189,29 @@ export default function IndexPage() {
         .header-section {
           margin-bottom: var(--spacing-xl);
         }
+        
+        @media (max-width: 768px) {
+          .header-section {
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+          }
+        }
 
         .page-title {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-md);
           color: var(--color-text-primary);
           font-size: var(--text-5xl);
+        }
+        
+        @media (max-width: 768px) {
+          .page-title {
+            font-size: var(--text-4xl);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .page-title {
+            font-size: var(--text-3xl);
+          }
         }
 
         .stories-section {
@@ -206,9 +221,36 @@ export default function IndexPage() {
           gap: var(--spacing-lg);
           margin-bottom: var(--spacing-xl);
         }
+        
+        @media (max-width: 480px) {
+          .stories-section {
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+          }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+          .stories-section {
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+          }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .stories-section {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          }
+        }
 
         .story-item {
           padding: var(--spacing-md);
+        }
+        
+        @media (max-width: 768px) {
+          .story-item {
+            padding: var(--spacing-sm);
+          }
         }
 
         .modal-header {
@@ -223,6 +265,20 @@ export default function IndexPage() {
           gap: var(--spacing-sm);
           color: var(--color-text-primary);
         }
+        
+        @media (max-width: 768px) {
+          .modal-title {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--spacing-md);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .modal-title {
+            font-size: var(--text-xl);
+            flex-direction: column;
+          }
+        }
 
         .modal-body {
         }
@@ -231,6 +287,12 @@ export default function IndexPage() {
           display: flex;
           flex-direction: column;
           gap: var(--spacing-lg);
+        }
+        
+        @media (max-width: 768px) {
+          .upload-form {
+            gap: var(--spacing-md);
+          }
         }
 
         .form-group {
@@ -299,6 +361,13 @@ export default function IndexPage() {
           transition: all var(--transition-smooth);
           opacity: 1;
         }
+        
+        @media (max-width: 768px) {
+          .submit-button {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-size: var(--text-base);
+          }
+        }
 
         .submit-button:hover:not(:disabled) {
           transform: translateY(-2px);
@@ -350,6 +419,20 @@ export default function IndexPage() {
           box-shadow: var(--shadow-lg);
           transform: translateY(0) scale(1);
           container-type: inline-size;
+        }
+        
+        @media (max-width: 768px) {
+          .create-story-card {
+            padding: var(--spacing-lg) var(--spacing-md);
+            gap: var(--spacing-sm);
+            border-radius: var(--radius-md);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .create-story-card {
+            padding: var(--spacing-md);
+          }
         }
 
         .create-story-card:hover {
@@ -431,6 +514,18 @@ export default function IndexPage() {
           font-size: var(--text-5xl);
           animation: sparkle 2s ease-in-out infinite;
         }
+        
+        @media (max-width: 768px) {
+          .sparkle-icon {
+            font-size: var(--text-4xl);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .sparkle-icon {
+            font-size: var(--text-3xl);
+          }
+        }
 
         .card-title {
           font-size: var(--text-2xl);
@@ -439,6 +534,19 @@ export default function IndexPage() {
           text-align: center;
           color: var(--color-starlight-cream);
           transition: color var(--transition-base);
+          line-height: 1.3;
+        }
+        
+        @media (max-width: 768px) {
+          .card-title {
+            font-size: var(--text-xl);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .card-title {
+            font-size: var(--text-lg);
+          }
         }
 
         .create-story-card:hover .card-title {

@@ -205,6 +205,14 @@ export default function StoryCard({ story = {}, onClick }) {
           filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
           transform-origin: top center;
         }
+        
+        @media (max-width: 480px) {
+          .ribbon {
+            width: 16%;
+            right: 10%;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+          }
+        }
 
         .badge-star {
           position: absolute;
@@ -222,9 +230,17 @@ export default function StoryCard({ story = {}, onClick }) {
           animation: swing 3s ease-in-out infinite;
           container-type: inline-size;
         }
+        
+        @media (max-width: 480px) {
+          .badge-star {
+            width: 18%;
+            left: 6%;
+            top: 6%;
+          }
+        }
 
         .star-icon {
-          font-size: var(--text-xl);
+          font-size: clamp(0.75rem, 4cqw, 1.25rem);
           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 

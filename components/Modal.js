@@ -77,6 +77,13 @@ export default function Modal({ isVisible, onClose, children }) {
           padding: var(--spacing-md);
           pointer-events: none;
         }
+        
+        @media (max-width: 768px) {
+          .modal-wrapper {
+            padding: var(--spacing-sm);
+            align-items: flex-end;
+          }
+        }
 
         .modal-backdrop {
           position: fixed;

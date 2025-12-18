@@ -28,7 +28,14 @@ export default function EndPage() {
           justify-content: center;
           align-items: center;
           height: 100%;
-          padding: var(--spacing-3xl) 0;
+          padding: var(--spacing-3xl) var(--spacing-md);
+          text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+          .end-container {
+            padding: var(--spacing-2xl) var(--spacing-sm);
+          }
         }
         
         .check-circle {
@@ -43,6 +50,31 @@ export default function EndPage() {
           box-shadow: var(--shadow-lg), var(--shadow-glow-strong);
           animation: glowPulse 2s ease-in-out infinite;
         }
+        
+        @media (max-width: 768px) {
+          .check-circle {
+            width: 80px;
+            height: 80px;
+            margin-bottom: var(--spacing-md);
+          }
+          
+          .check-circle svg {
+            width: 60px;
+            height: 60px;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .check-circle {
+            width: 70px;
+            height: 70px;
+          }
+          
+          .check-circle svg {
+            width: 50px;
+            height: 50px;
+          }
+        }
 
         .end-title {
           font-size: var(--text-5xl);
@@ -52,12 +84,41 @@ export default function EndPage() {
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
+        
+        @media (max-width: 768px) {
+          .end-title {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--spacing-md);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .end-title {
+            font-size: var(--text-3xl);
+          }
+        }
 
         .end-message {
           font-size: var(--text-2xl);
           color: var(--color-text-secondary);
           opacity: 0.8;
           margin-bottom: var(--spacing-2xl);
+          line-height: 1.6;
+          max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+          .end-message {
+            font-size: var(--text-xl);
+            margin-bottom: var(--spacing-xl);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .end-message {
+            font-size: var(--text-lg);
+            margin-bottom: var(--spacing-lg);
+          }
         }
 
         .home-button {
@@ -71,10 +132,30 @@ export default function EndPage() {
           transition: all var(--transition-smooth);
           box-shadow: var(--shadow-lg);
         }
+        
+        @media (max-width: 768px) {
+          .home-button {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-size: var(--text-lg);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .home-button {
+            font-size: var(--text-base);
+            padding: var(--spacing-sm) var(--spacing-md);
+          }
+        }
 
         .home-button:hover {
           transform: translateY(-4px) scale(1.05);
           box-shadow: var(--shadow-lg), var(--shadow-glow);
+        }
+        
+        @media (max-width: 768px) {
+          .home-button:hover {
+            transform: translateY(-2px) scale(1.02);
+          }
         }
 
         @keyframes glowPulse {

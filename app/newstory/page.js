@@ -51,6 +51,12 @@ export default function NewStoryPage() {
           text-align: center;
           margin-bottom: var(--spacing-xl);
         }
+        
+        @media (max-width: 768px) {
+          .header-section {
+            margin-bottom: var(--spacing-lg);
+          }
+        }
 
         .page-title {
           display: flex;
@@ -60,9 +66,28 @@ export default function NewStoryPage() {
           color: var(--color-text-primary);
           font-size: var(--text-5xl);
         }
+        
+        @media (max-width: 768px) {
+          .page-title {
+            font-size: var(--text-4xl);
+            gap: var(--spacing-sm);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .page-title {
+            font-size: var(--text-3xl);
+          }
+        }
 
         .title-icon {
           animation: float 3s ease-in-out infinite;
+        }
+        
+        @media (max-width: 768px) {
+          .title-icon {
+            font-size: 0.8em;
+          }
         }
       `}</style>
     </>

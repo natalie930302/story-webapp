@@ -95,6 +95,13 @@ export default function Question({ questions, onSubmit }) {
           flex-direction: column;
           gap: var(--spacing-xl);
         }
+        
+        @media (max-width: 768px) {
+          .question-container {
+            padding: var(--spacing-sm);
+            gap: var(--spacing-lg);
+          }
+        }
 
         /* Step Indicators */
         .step-indicators {
@@ -103,6 +110,12 @@ export default function Question({ questions, onSubmit }) {
           justify-content: center;
           flex-wrap: wrap;
           animation-delay: 0.1s;
+        }
+        
+        @media (max-width: 768px) {
+          .step-indicators {
+            gap: var(--spacing-sm);
+          }
         }
 
         .step-indicator {
@@ -116,6 +129,22 @@ export default function Question({ questions, onSubmit }) {
           position: relative;
           font-weight: 700;
           text-shadow: var(--shadow-md);
+        }
+        
+        @media (max-width: 768px) {
+          .step-indicator {
+            width: 40px;
+            height: 40px;
+            font-size: var(--text-sm);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .step-indicator {
+            width: 36px;
+            height: 36px;
+            font-size: var(--text-sm);
+          }
         }
 
         .step-indicator.completed,
@@ -171,6 +200,12 @@ export default function Question({ questions, onSubmit }) {
           text-align: center;
           padding: 0 var(--spacing-md);
         }
+        
+        @media (max-width: 768px) {
+          .question-wrapper {
+            padding: 0 var(--spacing-sm);
+          }
+        }
 
         .question-box {
           padding: var(--spacing-2xl) var(--spacing-3xl);
@@ -184,6 +219,19 @@ export default function Question({ questions, onSubmit }) {
           overflow: hidden;
           backdrop-filter: blur(16px);
           transition: all var(--transition-smooth);
+        }
+        
+        @media (max-width: 768px) {
+          .question-box {
+            padding: var(--spacing-xl) var(--spacing-lg);
+            border-radius: var(--radius-md);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .question-box {
+            padding: var(--spacing-lg) var(--spacing-md);
+          }
         }
 
         .shimmer-effect {
@@ -201,11 +249,37 @@ export default function Question({ questions, onSubmit }) {
           color: var(--color-text-primary);
           position: relative;
           z-index: 1;
+          line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+          .question-text {
+            font-size: var(--text-xl);
+            line-height: 1.5;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .question-text {
+            font-size: var(--text-lg);
+          }
         }
 
         .quote {
           font-size: var(--text-2xl);
           color: var(--color-gold-light);
+        }
+        
+        @media (max-width: 768px) {
+          .quote {
+            font-size: var(--text-xl);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .quote {
+            font-size: var(--text-lg);
+          }
         }
 
         /* Options Grid */
@@ -217,6 +291,20 @@ export default function Question({ questions, onSubmit }) {
           max-width: 900px;
           margin: 0 auto;
           width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+          .options-grid {
+            padding: 0 var(--spacing-sm);
+            gap: var(--spacing-md);
+            grid-template-columns: 1fr;
+          }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .options-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          }
         }
 
         .option-button {
@@ -238,6 +326,25 @@ export default function Question({ questions, onSubmit }) {
           justify-content: center;
           transform: translateY(0) scale(1);
           outline: none;
+          text-align: center;
+          line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+          .option-button {
+            padding: var(--spacing-md);
+            font-size: var(--text-lg);
+            min-height: 64px;
+            border-radius: var(--radius-md);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .option-button {
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: var(--text-base);
+            min-height: 56px;
+          }
         }
 
         .option-button:hover:not(.selected) {

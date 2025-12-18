@@ -88,6 +88,13 @@ export default function QuestionsPage() {
         .header-section {
           margin-bottom: var(--spacing-xl);
         }
+        
+        @media (max-width: 768px) {
+          .header-section {
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+          }
+        }
 
         .page-title {
           display: flex;
@@ -98,9 +105,28 @@ export default function QuestionsPage() {
           font-size: var(--text-5xl);
           margin-bottom: var(--spacing-md);
         }
+        
+        @media (max-width: 768px) {
+          .page-title {
+            font-size: var(--text-4xl);
+            gap: var(--spacing-sm);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .page-title {
+            font-size: var(--text-3xl);
+          }
+        }
 
         .title-icon {
           animation: float 3s ease-in-out infinite;
+        }
+        
+        @media (max-width: 768px) {
+          .title-icon {
+            font-size: 0.8em;
+          }
         }
 
         .page-subtitle {
@@ -108,6 +134,18 @@ export default function QuestionsPage() {
           text-align: center;
           font-size: var(--text-lg);
           animation-delay: 0.15s;
+        }
+        
+        @media (max-width: 768px) {
+          .page-subtitle {
+            font-size: var(--text-base);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .page-subtitle {
+            font-size: var(--text-sm);
+          }
         }
       `}</style>
     </>

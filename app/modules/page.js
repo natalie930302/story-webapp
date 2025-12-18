@@ -51,12 +51,38 @@ export default function ModulesPage() {
           color: var(--color-text-primary);
           text-align: center;
         }
+        
+        @media (max-width: 768px) {
+          .page-title {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--spacing-lg);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .page-title {
+            font-size: var(--text-3xl);
+          }
+        }
 
         .section-title {
           font-size: var(--text-3xl);
           margin-bottom: var(--spacing-lg);
           color: var(--color-text-primary);
           text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--spacing-md);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .section-title {
+            font-size: var(--text-xl);
+          }
         }
 
         .description {
@@ -66,6 +92,22 @@ export default function ModulesPage() {
           text-align: center;
           max-width: 900px;
           margin: 0 auto var(--spacing-2xl);
+          line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+          .description {
+            font-size: var(--text-base);
+            margin: 0 auto var(--spacing-xl);
+            line-height: 1.6;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .description {
+            font-size: var(--text-sm);
+            margin: 0 auto var(--spacing-lg);
+          }
         }
 
         .modules-grid {
@@ -73,6 +115,20 @@ export default function ModulesPage() {
           grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
           gap: var(--spacing-lg);
           margin-bottom: var(--spacing-2xl);
+        }
+        
+        @media (max-width: 768px) {
+          .modules-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+          }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .modules-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          }
         }
 
         .module-card {
@@ -82,11 +138,25 @@ export default function ModulesPage() {
           border: 2px solid var(--color-border-primary);
           box-shadow: var(--shadow-md);
           cursor: pointer;
+          transition: all var(--transition-smooth);
+        }
+        
+        @media (max-width: 768px) {
+          .module-card {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+          }
         }
 
         .module-card:hover {
           transform: translateY(-8px);
           box-shadow: var(--shadow-lg), var(--shadow-glow);
+        }
+        
+        @media (max-width: 768px) {
+          .module-card:hover {
+            transform: translateY(-4px);
+          }
         }
 
         .module-header {
@@ -95,6 +165,13 @@ export default function ModulesPage() {
           gap: var(--spacing-sm);
           margin-bottom: var(--spacing-md);
           font-size: var(--text-2xl);
+        }
+        
+        @media (max-width: 768px) {
+          .module-header {
+            font-size: var(--text-xl);
+            margin-bottom: var(--spacing-sm);
+          }
         }
 
         .module-name {
@@ -105,6 +182,13 @@ export default function ModulesPage() {
           font-size: var(--text-base);
           color: var(--color-text-dark);
           opacity: 0.8;
+          line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+          .module-description {
+            font-size: var(--text-sm);
+          }
         }
       `}</style>
     </>

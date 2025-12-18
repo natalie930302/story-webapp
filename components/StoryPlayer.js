@@ -308,11 +308,27 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         box-shadow: var(--shadow-sm);
       }
+      
+      @media (max-width: 768px) {
+        .player-header {
+          padding: var(--spacing-md);
+          border-radius: var(--radius-md) var(--radius-md) 0 0;
+          flex-direction: column;
+          gap: var(--spacing-sm);
+          text-align: center;
+        }
+      }
 
       .header-container {
         display: flex;
         align-items: center;
         gap: var(--spacing-md);
+      }
+      
+      @media (max-width: 768px) {
+        .header-container {
+          gap: var(--spacing-sm);
+        }
       }
 
       .header-icon {
@@ -326,6 +342,14 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         box-shadow: var(--shadow-glow);
         font-size: var(--text-3xl);
         animation: iconFloat 3s ease-in-out infinite;
+      }
+      
+      @media (max-width: 768px) {
+        .header-icon {
+          width: 40px;
+          height: 40px;
+          font-size: var(--text-2xl);
+        }
       }
 
       @keyframes iconFloat {
@@ -342,12 +366,30 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         color: var(--color-starlight-cream);
       }
       
+      @media (max-width: 768px) {
+        .header-title {
+          font-size: var(--text-xl);
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .header-title {
+          font-size: var(--text-lg);
+        }
+      }
+      
       .progress-info {
         display: flex;
         align-items: center;
         gap: var(--spacing-xs);
         font-size: var(--text-base);
         color: var(--color-starlight-cream);
+      }
+      
+      @media (max-width: 768px) {
+        .progress-info {
+          font-size: var(--text-sm);
+        }
       }
 
       .progress-divider {
@@ -363,6 +405,20 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         overflow: hidden;
         box-shadow: var(--shadow-md);
         transition: all var(--transition-base);
+      }
+      
+      @media (max-width: 768px) {
+        .text-card {
+          padding: var(--spacing-xl) var(--spacing-lg);
+          min-height: 240px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .text-card {
+          padding: var(--spacing-lg) var(--spacing-md);
+          min-height: 200px;
+        }
       }
 
       .notebook-lines {
@@ -392,16 +448,43 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         user-select: none;
         pointer-events: none;
       }
+      
+      @media (max-width: 768px) {
+        .quote-mark {
+          font-size: var(--text-5xl);
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .quote-mark {
+          font-size: var(--text-4xl);
+          opacity: 0.12;
+        }
+      }
 
       .quote-left {
         top: var(--spacing-md);
         left: var(--spacing-lg);
+      }
+      
+      @media (max-width: 768px) {
+        .quote-left {
+          top: var(--spacing-sm);
+          left: var(--spacing-md);
+        }
       }
 
       .quote-right {
         bottom: var(--spacing-md);
         right: var(--spacing-lg);
         transform: rotate(180deg);
+      }
+      
+      @media (max-width: 768px) {
+        .quote-right {
+          bottom: var(--spacing-sm);
+          right: var(--spacing-md);
+        }
       }
 
       .text-card.slide-forward {
@@ -419,6 +502,20 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         position: relative;
         z-index: 1;
         width: 100%;
+      }
+      
+      @media (max-width: 768px) {
+        .text-content {
+          font-size: var(--text-xl);
+          line-height: 1.6;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .text-content {
+          font-size: var(--text-lg);
+          line-height: 1.5;
+        }
       }
 
       .empty-text {
@@ -564,6 +661,13 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         padding: var(--spacing-lg);
         position: relative;
       }
+      
+      @media (max-width: 768px) {
+        .controls-card {
+          border-radius: 0 0 var(--radius-md) var(--radius-md);
+          padding: var(--spacing-md);
+        }
+      }
 
       .btn-play {
         width: 72px;
@@ -580,6 +684,20 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         box-shadow: var(--shadow-glow);
         position: relative;
         z-index: 2;
+      }
+      
+      @media (max-width: 768px) {
+        .btn-play {
+          width: 64px;
+          height: 64px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .btn-play {
+          width: 56px;
+          height: 56px;
+        }
       }
 
       .btn-play.playing {
@@ -639,6 +757,12 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
       .btn-text {
         font-size: var(--text-md);
         color: var(--color-text-dark);
+      }
+
+      @media (max-width: 480px) {
+        .btn-text {
+          display: none;
+        }
       }
 
       .btn-nav:hover:not(.disabled) {

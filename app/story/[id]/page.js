@@ -46,6 +46,13 @@ export default function StoryPage() {
         .header-section {
           margin-bottom: var(--spacing-xl);
         }
+        
+        @media (max-width: 768px) {
+          .header-section {
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+          }
+        }
 
         .page-title {
           display: flex;
@@ -54,6 +61,18 @@ export default function StoryPage() {
           gap: var(--spacing-md);
           color: var(--color-text-primary);
           font-size: var(--text-5xl);
+        }
+        
+        @media (max-width: 768px) {
+          .page-title {
+            font-size: var(--text-4xl);
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .page-title {
+            font-size: var(--text-3xl);
+          }
         }
       `}</style>
     </>
