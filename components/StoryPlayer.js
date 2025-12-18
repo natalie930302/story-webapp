@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 
-const SENTENCE_SPLIT_REGEX = /([。？！.?!；;，\r\n\uFE30-\uFFA0()（）「」]+)/g;
+const SENTENCE_SPLIT_REGEX = /([。？！.?!；;，、\r\n\uFE30-\uFFA0()（）「」]+)/g;
 
 const moduleConfig = {
   wind: { 
@@ -416,9 +416,16 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
       
       @media (max-width: 480px) {
         .text-card {
-          padding: var(--spacing-lg) var(--spacing-md);
-          min-height: 200px;
+          padding: var(--spacing-xl) var(--spacing-lg);
         }
+      }
+
+      .text-card.slide-forward {
+        animation: slideInRight 0.5s ease-out;
+      }
+
+      .text-card.slide-backward {
+        animation: slideInLeft 0.5s ease-out;
       }
 
       .notebook-lines {
@@ -487,14 +494,6 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         }
       }
 
-      .text-card.slide-forward {
-        animation: slideInRight 0.5s ease-out;
-      }
-
-      .text-card.slide-backward {
-        animation: slideInLeft 0.5s ease-out;
-      }
-
       .text-content {
         font-size: var(--text-2xl);
         line-height: 1.8;
@@ -507,14 +506,12 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
       @media (max-width: 768px) {
         .text-content {
           font-size: var(--text-xl);
-          line-height: 1.6;
         }
       }
       
       @media (max-width: 480px) {
         .text-content {
           font-size: var(--text-lg);
-          line-height: 1.5;
         }
       }
 
@@ -533,8 +530,7 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
 
       .text-segment.highlighted {
         color: var(--color-gold);
-        text-shadow: var(--shadow-glow);
-        animation: textGlow 1.5s ease-in-out infinite;
+        text-shadow: var(--shadow-glow-gold);
       }
 
       .modules-list {
@@ -548,9 +544,14 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         transform-origin: bottom right;
         pointer-events: none;
         display: flex;
-        // flex-direction: column;
         gap: var(--spacing-md);
         align-items: flex-end;
+      }
+
+      @media (max-width: 768px) {
+        .modules-list {
+          max-width: 80%;
+        }
       }
 
       .module-card {
@@ -806,15 +807,6 @@ export default function StoryPlayer({ segments, onNext, buttonText = "下一段"
         to {
           opacity: 1;
           transform: translateX(0);
-        }
-      }
-
-      @keyframes textGlow {
-        0%, 100% {
-          text-shadow: var(--shadow-glow);
-        }
-        50% {
-          text-shadow: var(--shadow-glow-strong);
         }
       }
 

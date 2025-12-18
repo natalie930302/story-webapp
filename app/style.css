@@ -113,6 +113,7 @@
   --shadow-2xl: 0 20px 48px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
   --shadow-glow: 0 0 24px var(--color-gold-glow), 0 0 16px var(--color-neon-blue);
   --shadow-glow-strong: 0 0 40px var(--color-gold-glow), 0 0 30px var(--color-neon-purple);
+  --shadow-glow-gold: 0 0 16px var(--color-gold-glow);
 
   /* 漸變色 */
   --gradient-primary: linear-gradient(
