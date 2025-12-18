@@ -74,9 +74,9 @@
   --breakpoint-2xl: 1536px;
 
   /* 響應式間距 */
-  --spacing-mobile: clamp(1rem, 4vw, 2rem);
-  --spacing-tablet: clamp(1.5rem, 5vw, 3rem);
-  --spacing-desktop: clamp(2rem, 6vw, 6rem);
+  --spacing-mobile: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+  --spacing-tablet: clamp(0.75rem, 2.5vw, 1.5rem) clamp(1.5rem, 5vw, 3rem);
+  --spacing-desktop: clamp(1rem, 3vw, 3rem) clamp(2rem, 6vw, 6rem);
 
   /* 字體大小系統 */
   --text-sm: 0.875rem; /* 14px */
